@@ -1,56 +1,1390 @@
+{%load static%}
+
 <!DOCTYPE html>
-{% load static %}
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0"
-		/>
-		<title>Paylink</title>
-		<style>
-			#myVideo {
-				position: fixed;
-				right: 0;
-				top: 0;
-				/* width: 100%; */
-				background-position: center center;
-				background-size: auto 100%;
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="{%static '/css/bootstrap.css'%}" />
+	<link rel="stylesheet" href="{%static '/css/bootstrap.min.css'%}" />
+	<link rel="stylesheet" href="{%static '/css/bootstrap.rtl.min.css'%}" />
+	<link rel="stylesheet" href="{%static '/fontawesome-free-6.5.1-web/css/all.css'%}" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;600;900&display=swap" rel="stylesheet" />
+	<!-- --bs-primary: #FF9B05;
+		--bs-secondary: #001737; -->
+	<!--====== Tiny Slider Css ======-->
+	<link rel="stylesheet" href="https://cdn.ayroui.com/1.0/css/tiny-slider.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+	<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+	<style>
+		body {
+			margin: 0;
+			font-family: "Poppins", sans-serif;
+			background-color: #fff;
+			/* background: linear-gradient(
+					104deg,
+					rgba(0, 0, 0, 1) 1%,
+					rgba(0, 23, 55, 1) 50%,
+					rgba(38, 104, 161, 1) 80%
+				); */
+			/* background-size: 100% 100%;
+				background-repeat: no-repeat; */
+			/* background-image: url("./assets/img/bg_dark.jpg"); */
+			/* background-position: center; */
+		}
+
+		.nav {
+			background: rgba(255, 255, 255, 0.2);
+			backdrop-filter: blur(10px);
+			padding: 20px;
+			box-shadow: 0 4px 6px rgba(255, 255, 255, 0);
+		}
+
+		.f-poppins {
+			font-family: "Poppins", sans-serif;
+		}
+
+		#from_top,
+		.top_web {
+			display: none;
+			/* Hide initially */
+		}
+
+		.hidden {
+			opacity: 0;
+			transform: translateY(30px);
+			/* Start off-screen */
+			transition: opacity 1s ease, transform 1s ease;
+		}
+
+		.show {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	</style>
+	<title>Paylink Zambia</title>
+</head>
+
+<body class="bg-light">
+	<script>
+
+
+		$(document).ready(function () {
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('show');
+					} else {
+						entry.target.classList.remove('show');
+					}
+				});
+			});
+
+			const hiddenElements = document.querySelectorAll('.hidden');
+			hiddenElements.forEach((e) => observer.observe(e));
+			// Slide down the element from the top
+			$("#from_top").slideDown(1500);
+			// Slide in top_mobile from the right
+			$(".top_mobile")
+				.animate({ opacity: 1 }, 0.5)
+				.animate({ right: "40" }, 800);
+
+			// Slide in top_text from the top
+			$(".top_web").fadeIn(1000);
+			//    animate({opacity: 1}, 500).animate({bottom: "0"}, 800);
+
+			// Typing effect for top_text content
+			var textToType = $(".top_text").text();
+			$(".top_text").empty(); // Clear existing text
+			var i = 0;
+			function typeText() {
+				if (i < textToType.length) {
+					$(".top_text").append(textToType.charAt(i));
+					i++;
+					setTimeout(typeText, 300); // Adjust typing speed (milliseconds)
+				}
 			}
-			#text {
-				position: fixed;
-				bottom: 50%;
-				/* background: rgba(0, 0, 0, 0.5); */
-				color: #fff;
-				text-align: center;
-				padding: 20px;
-			}
-			#text div {
-				font-size: 36px;
-				font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-					"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-			}
-			#text h2 {
-				font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-					"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-			}
-		</style>
-	</head>
-	<body style="display: flex; justify-content: center; align-items: center">
-		<video
-			autoplay
-			muted
-			loop
-			id="myVideo"
-		>
-			<source
-				src="{% static 'background.mp4' %}"
-				type="video/mp4"
-			/>
-		</video>
-		<div id="text">
-			<div>Coming Soon</div>
-			<h2>PayLink ZM</h2>
+			typeText();
+		});
+	</script>
+
+	<section class="hidden bg-secondary">
+
+		<div class="content">
+			<div style="border-bottom: 1px solid rgb(51, 86, 119)"
+				class="container-md text-white d-flex justify-content-between py-3  hidden-mobile" hidden>
+				<div class="logo  hidden-mobile">
+					<img src="{%static '/img/image4.png'%}" alt="" width="25%"
+						style="position: relative; right: 0.5rem;">
+
+				</div>
+
+			</div>
+			<nav class="navbar nav sticky-top navbar-expand-lg navbar-dark bg-secondary">
+				<div class="container-md">
+					<div class="collapse navbar-collapse" id="navbarNav">
+						<ul class="navbar-nav">
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="#">Home</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#products">Products</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#services">Services</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link disabled" href="#footer" tabindex="-1"
+									aria-disabled="true">Contact</a>
+							</li>
+						</ul>
+					</div>
+					<span class="navbar-text d-none d-xl-block">
+						<span class="mx-2"><i class="fa-brands fa-facebook"></i></span>
+						<span class="mx-2"><i class="fa-brands fa-instagram"></i></span>
+						<span class="mx-2"><i class="fa-brands fa-square-whatsapp"></i></span>
+					</span>
+				</div>
+			</nav>
 		</div>
-	</body>
+		<div class="top_bg d-flex align-items-center">
+			<div class="d-flex justify-content-between text-white container-md">
+				<div class="tex col-xl-5 col-md-5">
+					<div id="from_top" class="col-12">
+						<div class="display-4 f-poppins" style="font-weight: bolder">
+							We Are Paylink
+						</div>
+						<div class="my-2"></div>
+						We aspire to lead at the forefront of technological advancements, setting the standard for
+						innovation and excellence in the Pan-African tech landscape.
+					</div>
+					<div id="from_top	" class="col-xl-12 d-flex align-items-center my-3 justify-content-between">
+						<a href="" class="btn btn-primary rounded-pill p-3 col-xl-5">Get Started</a>
+						<div class="d-flex justify-content-between d-none d-xl-block">
+
+						</div>
+					</div>
+				</div>
+				<style>
+					.top_bg {
+						height: 694px;
+						background-image: url('./static/img/back_1.jpg');
+						background-position: center center;
+						background-size: 100% auto;
+						background-repeat: no-repeat;
+					}
+
+					.top_mobile {
+						position: relative;
+						top: 0rem;
+						z-index: 10;
+					}
+
+					.top_web {
+						width: 40%;
+						position: absolute;
+						top: 30%;
+						right: 20%;
+					}
+
+					.top_text {
+						position: absolute;
+						top: 65%;
+						right: 5%;
+						z-index: 20;
+					}
+
+					.text_card {
+						background: rgba(7, 7, 7, 0.704);
+						backdrop-filter: blur(30px);
+						border: 1px solid rgb(189, 189, 189);
+						padding: 20px;
+						border-radius: 4px;
+						width: fit-content;
+					}
+
+					.top_text {
+						background: rgba(88, 88, 88, 0.104);
+						backdrop-filter: blur(30px);
+						border: 1px solid rgb(189, 189, 189);
+						padding: 20px;
+						border-radius: 0px 8px 8px 0px;
+						width: fit-content;
+					}
+
+					@media screen and (max-width: 480px) {
+
+						.top_text,
+						.top_web,
+						.top_mobile {
+							display: none;
+						}
+
+						.top_bg {
+							height: 460px;
+							background-image: url('./static/img/back_1.jpg');
+							background-position: center center;
+							background-size: auto 100%;
+							padding: 20px;
+							background-repeat: no-repeat;
+						}
+					}
+				</style>
+				<div class="col-3  hidden-mobile" style="height: 0px">
+					<img class="top_mobile" src="{%static '/img/image7.png'%}" alt="image of mbile app" srcset=""
+						width='90%' style="position: relative; right: 20rem;  " />
+					<img class="top_web" src="{%static '/img/image11-removebg-preview.png'%}" width='100%'
+						alt="image of web dashboard" srcset="" />
+					<!-- <div class="top_text">Hello, welcome!</div> -->
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="products" class="hidden py-5 text-black	" style=" ">
+
+
+		<div class="hidden slider-three" style="">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-lg-6">
+
+						<!-- section title -->
+					</div>
+				</div>
+				<!-- row -->
+
+				<div class="slider-items-wrapper">
+					<div class="row slider-items-active">
+						<div class="container-md my-5 px-5">
+							<div class="single-items-one">
+								<div class="col-12 col-md-12 my-8" style="padding: 0rem 4rem">
+									<img src="{%static '/img/image1.png' %}" width="50%" alt=""
+										style="position: relative; right: 1.5rem;">
+									<div class="mt-3 h5">HealthLink</div>
+									<div class="p" style="font-size: small; color: 'black';">
+										HealthLink is a cutting-edge web and mobile-based application designed to
+										streamline the connection between insurance companies, healthcare facilities,
+										and beneficiaries.
+									</div>
+								</div>
+							</div>
+							<!-- single-items-one -->
+						</div>
+						<div class="container-md my-5 px-5">
+							<div class="single-items-one">
+								<div class="col-12 col-md-12 my-8" style="padding: 0rem 4rem; ">
+									<img src="{%static '/img/image3.png'%}" width="50%" alt=""
+										style="position: relative; right: 0rem;">
+									<div class="mt-3 h5">SureLink</div>
+									<div class="p" style="font-size: small">
+										SureLink is a comprehensive insurance and reinsurance software solution tailored
+										to meet the unique requirements of businesses.
+									</div>
+								</div>
+							</div>
+							<!-- single-items-one -->
+						</div>
+						<div class="container-md my-5 px-5">
+							<div class="single-items-one">
+								<div class="single-items-one">
+									<div class="col-12 col-md-12 my-8" style=" padding: 0rem 4rem;">
+										<img src="{%static '/img/image2.png'%}" width="100%" alt=""
+											style="position: relative; right: 0.5rem;">
+										<div class="mt-3 h5">LoanLink</div>
+										<div class="p" style="font-size: small">
+											LoanLink is a feature-rich CRM (Customer Relationship Management) software
+											solution designed to meet the diverse needs of businesses, from small-scale
+											enterprises.
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- single-items-one -->
+						</div>
+						<div class="container-md my-5 px-5">
+							<div class="single-items-one">
+								<div class="single-items-one">
+									<div class="single-items-one">
+										<div class="col-12 col-md-12 my-8" style=" padding: 2rem 4rem;">
+											<img src="{%static '/img/clienk-link.png'%}" width="100%" alt=""
+												style="position: relative; right: 0.5rem;">
+											<div class="mt-3 h5">ClientLink</div>
+											<div class="p" style="font-size: small">
+												ClientLink is a feature-rich CRM (Customer Relationship Management)
+												software solution designed to meet the diverse needs of businesses, from
+												small-scale enterprises.
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- single-items-one -->
+						</div>
+					</div>
+					<!-- row -->
+				</div>
+			</div>
+		</div>
+
+		<!-- container -->
+	</section>
+
+	<!--====== SLIDER THREE PART ENDS ======-->
+	</div>
+	</div>
+	</div>
+	</section>
+
+	<!--====== FEATURE ONE PART START ======-->
+	<section id="services" class="hidden features-area features-one bg-light">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-6">
+					<div class="section-title text-center">
+						<h3 class="title">Services Offered by Paylink</h3>
+						<p class="text">
+							At Paylink, we offer a wide range of services tailored to meet the diverse needs of
+							businesses, from small-scale enterprises to large corporations.
+						</p>
+					</div>
+					<!-- row -->
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-7 col-12" style="
+							background-image: url( './static/img/crm.png');
+							background-position: center center;
+							background-size: 100% auto;
+							height: 580px;
+							background-repeat: no-repeat;
+						"></div>
+				<div class="col-md-5 col-12">
+					<!-- row -->
+					<div class="row justify-content-between">
+						<div class="col-lg-6 col-md-7 col-sm-9">
+							<div class="features-style-one text-end">
+								<div class="features-icon">
+									<img src="{%static '/img/saas_4968913.png'%}" alt="Saas" width="70%"
+										style="position: relative; bottom: 1rem;">
+								</div>
+								<div class="features-content">
+									<h4 class="features-title">SaaS Solutions</h4>
+									<p class="text">
+										Our Software as a Service (SaaS) solutions cater to businesses of all sizes,
+										providing customizable solutions according to their unique requirements.
+									</p>
+								</div>
+							</div>
+							<!-- single features -->
+						</div>
+						<div class="col-lg-6 col-md-7 col-sm-9">
+							<div class="features-style-one text-end">
+								<div class="features-icon">
+									<img src="{'%static '/img/marketing_14143198.png'%}" alt="BPO" width="70%"
+										style="position: relative; bottom: 1rem;">
+								</div>
+								<div class="features-content">
+									<h4 class="features-title">BPO Services</h4>
+									<p class="text">
+										Our Business Process Outsourcing (BPO) services are designed to streamline your
+										customer care support operations.
+									</p>
+								</div>
+							</div>
+							<!-- single features -->
+
+						</div>
+						<!-- row -->
+					</div>
+				</div>
+			</div>
+			<!-- container -->
+	</section>
+	<!--====== FEATURE ONE PART ENDS ======-->
+
+	<!--====== HEADER ONE PART START ======-->
+	<section class="hidden ">
+		<div class="header-area header-one bg-secondary text-white">
+
+			<div class="header-content-area">
+				<div class="container">
+					<div class="row align-items-center">
+						<div class="col-lg-6 col-12">
+							<div class="header-wrapper">
+								<div class="header-content">
+									<h1 class="header-title">
+										Mobile Development
+									</h1>
+									<p class="text-lg">
+										To leverage technology to empower businesses, enhance efficiency, and drive
+										growth. Committed to providing top-notch technological services tailored to the
+										unique needs of businesses, we ensure they not only adapt but thrive in the
+										ever-evolving digital era.
+									</p>
+									<div class="header-btn rounded-buttons">
+										<a class="btn primary-btn-outline btn-lg" href="javascript:void(0)">
+											Call Us Now !
+										</a>
+									</div>
+								</div>
+								<!-- header content -->
+							</div>
+						</div>
+						<div class="col-lg-6 col-12">
+							<div class="header-image d-none d-lg-block">
+								<div class="image">
+									<img src="{%static '/img/image7.png'%}" alt=""
+										style="position: relative; bottom: 0rem; width:50%">
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- row -->
+				</div>
+				<!-- container -->
+				<div class="header-shape">
+					<img src="https://cdn.ayroui.com/1.0/images/header/header-shape.svg" alt="shape" />
+				</div>
+				<!-- header-shape -->
+			</div>
+
+		</div>
+
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-6">
+
+					<!-- section title -->
+				</div>
+			</div>
+			<!-- row -->
+
+			<div class="hidden slider-three" style="background-color: white;">
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-lg-6">
+							<div class="section-title">
+								<div class="header text-center">
+									<h3 class="title">Friendly & Easy</h3>
+								</div>
+								<p class="text">
+								<ul class="list-text" style="ul li{list-style:none}">
+									<span>&rArr;</span> <span>Scalable solutions for small-scale to enterprise
+										businesses</span><br>
+									<span>&rArr;</span> <span>Cloud-based services enabling seamless third-party
+										integrations</span><br>
+									<span>&rArr;</span> <span>Dynamic applications that evolve with your business</span>
+								</ul>
+								</p>
+							</div>
+							<!-- section title -->
+						</div>
+					</div>
+					<!-- row -->
+
+					<div class="slider-items-wrapper">
+						<div class="row slider-items-active">
+							<div class="col-lg-4">
+								<div class="single-items-one">
+									<img src="{%static '/img/crm-1.jpg'%}" alt="Image" />
+								</div>
+								<!-- single-items-one -->
+							</div>
+							<div class="col-lg-4">
+								<div class="single-items-one">
+									<img src="{%static '/img/crm-2.jpg'%}" alt="Image" />
+								</div>
+								<!-- single-items-one -->
+							</div>
+							<div class="col-lg-4">
+								<div class="single-items-one">
+									<img src="{%static '/img/crm-3.jpg'%}" alt="Image" />
+								</div>
+								<!-- single-items-one -->
+							</div>
+							<!-- <div class="col-lg-4">
+							<div class="single-items-one">
+								<img src="{%static '/img/crm-4.jpg'%}" alt="Image" />
+							</div>
+							<!-- single-items-one 
+						</div> -->
+						</div>
+						<!-- row -->
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+			<!-- container -->
+	</section>
+
+	<!--====== SLIDER THREE PART ENDS ======-->
+
+	<!--====== Tiny Slider js ======-->
+	<script src="https://cdn.ayroui.com/1.0/js/tiny-slider.js"></script>
+
+	<script>
+		//======== tiny slider for slider-items-active
+		tns({
+			autoplay: true,
+			autoplayButtonOutput: false,
+			mouseDrag: true,
+			gutter: 0,
+			container: ".slider-items-active",
+			center: false,
+			nav: true,
+			navPosition: "bottom",
+			controls: false,
+			speed: 400,
+			controlsText: [
+				'<i class="lni lni-arrow-left-circle"></i>',
+				'<i class="lni lni-arrow-right-circle"></i>',
+			],
+			responsive: {
+				0: {
+					items: 1,
+				},
+
+				768: {
+					items: 2,
+				},
+				992: {
+					items: 3,
+				},
+			},
+		});
+	</script>
+	<!--====== CLIENT LOGO PART START ======-->
+	<section class="hidden client-logo-area client-logo-one bg-light">
+		<!--======  Start Section Title Two ======-->
+		<div class="section-title-two">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="content">
+							<!---<span> Our Partners </span>-->
+							<h2 class="fw-bold">Our Awesome Clients</h2>
+							<p>
+								To leverage technology to empower businesses, enhan ce efficiency, and drive growth.
+								Committed to providing top-notch technological services tailored to the unique needs of
+								businesses, we ensure they not only adapt but thrive in the ever-evolving digital era.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- container -->
+		</div>
+		<!--====== End Section Title Two ======-->
+		<!--<div class="container">
+			<div class="row">
+				<div class="col-md-2 col-6">
+					<div class="single-client text-center">
+						<img src="https://cdn.ayroui.com/1.0/images/client-logo/graygrids.svg" alt="Logo" />
+					</div>
+					<!-- single client -->
+		</div>
+		<!--<div class="col-md-2 col-6">
+					<div class="single-client text-center">
+						<img src="https://cdn.ayroui.com/1.0/images/client-logo/uideck.svg" alt="Logo" />
+					</div>
+					<!-- single client -->
+		</div>
+		<!--<div class="col-md-2 col-6">
+					<div class="single-client text-center">
+						<img src="https://cdn.ayroui.com/1.0/images/client-logo/ayroui.svg" alt="Logo" />
+					</div>
+					<!-- single client -->
+		</div>
+		</div>
+		<!-- row -->
+		</div>
+		<!-- container -->
+	</section>
+	<!--====== CLIENT LOGO PART ENDS ======-->
+
+	<!--====== HEADER ONE PART START ======-->
+	<section class="hidden ">
+		<div class="header-area header-one btn-primary text-white">
+
+			<div class="header-content-area">
+				<div class="container">
+					<div class="row align-items-center">
+						<div class="col-lg-6 col-12">
+							<div class="header-wrapper">
+								<div class="header-content">
+									<h1 class="header-title">
+										Web Development
+									</h1>
+									<p class="text-lg">
+										To leverage technology to empower businesses, enhance efficiency, and drive
+										growth. Committed to providing top-notch technological services tailored to the
+										unique needs of businesses, we ensure they not only adapt but thrive in the
+										ever-evolving digital era.
+									</p>
+									<div class="header-btn rounded-buttons">
+										<a class="btn primary-btn-outline btn-lg" href="javascript:void(0)">
+											Call Us Now !
+										</a>
+									</div>
+								</div>
+								<!-- header content -->
+							</div>
+						</div>
+						<div class="col-lg-6 col-12">
+							<div class="header-image d-none d-lg-block">
+								<div class="image">
+									<img src="{%static '/img/image8.png'%}" alt=""
+										style="position: relative; bottom: 0rem; width:100%">
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- row -->
+				</div>
+				<!-- container -->
+				<div class="header-shape">
+					<img src="https://cdn.ayroui.com/1.0/images/header/header-shape.svg" alt="shape" />
+				</div>
+				<!-- header-shape -->
+			</div>
+
+		</div>
+
+
+		<!-- container -->
+	</section>
+
+	<!--====== SLIDER THREE PART ENDS ======-->
+
+	<!--====== FOOTER ONE PART START ======-->
+	<footer id="footer" class="hidden bg-secondary footer-area footer-one text-white">
+		<div class="footer-widget">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-6 col-lg-4 col-sm-12">
+						<div class="f-about">
+							<div class="footer-logo">
+								<a href="javascript:void(0)">
+									<div class="logo">
+										<img src="{%static '/img/image4.png'%}" alt="" width="50%">
+									</div>
+								</a>
+							</div>
+							<p class="text">
+								We aspire to lead at the forefront of technological advancements.
+							</p>
+						</div>
+					</div>
+					<div class="col-xl-2 col-lg-2 col-sm-4">
+						<div class="footer-link">
+							<h6 class="footer-title">Company</h6>
+							<ul>
+								<li><a href="javascript:void(0)">About</a></li>
+								<li><a href="javascript:void(0)">Contact</a></li>
+								<li><a href="javascript:void(0)">Marketing</a></li>
+							</ul>
+						</div>
+						<!-- footer link -->
+					</div>
+					<div class="col-xl-2 col-lg-3 col-sm-4">
+						<div class="footer-link">
+							<h6 class="footer-title">Services</h6>
+							<ul>
+								<li><a href="javascript:void(0)">Products</a></li>
+								<li><a href="javascript:void(0)">Business</a></li>
+								<li><a href="javascript:void(0)">Developer</a></li>
+								<li><a href="javascript:void(0)">Insights</a></li>
+							</ul>
+						</div>
+						<!-- footer link -->
+					</div>
+					<div class="col-xl-2 col-lg-3 col-sm-4">
+						<!-- Start Footer Contact -->
+						<div class="footer-contact">
+							<h6 class="footer-title">Help & Suuport</h6>
+							<ul>
+								<li>
+									<i class="lni lni-map-marker"></i> H7JM+F44, Heroes Pl, Lusaka, Zambia
+								</li>
+								<li><i class="lni lni-phone-set"></i>+260 977 42 9510 </li>
+								<li><i class="lni lni-envelope"></i>info@paylinkzm.com</li>
+							</ul>
+						</div>
+						<!-- End Footer Contact -->
+					</div>
+				</div>
+				<!-- row -->
+			</div>
+			<!-- container -->
+		</div>
+		<!-- footer widget -->
+		<div class="footer-copyright">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="copyright text-center d-md-flex justify-content-between align-items-center">
+							<p class="text">Copyright © 2024 Paylink. All Rights Reserved</p>
+							<ul class="social">
+								<li>
+									<a href="javascript:void(0)">
+										<i class="lni lni-facebook-filled"></i>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:void(0)">
+										<i class="lni lni-twitter-original"></i>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:void(0)">
+										<i class="lni lni-instagram-filled"></i>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a>
+								</li>
+							</ul>
+						</div>
+						<!-- copyright -->
+					</div>
+				</div>
+				<!-- row -->
+			</div>
+			<!-- container -->
+		</div>
+		<!-- footer copyright -->
+	</footer>
+	<style>
+		/* ===== Buttons Css ===== */
+		.features-style-one .primary-btn-outline {
+			border-color: var(--primary);
+			color: var(--primary);
+		}
+
+		.features-style-one .active.primary-btn-outline,
+		.features-style-one .primary-btn-outline:hover,
+		.features-style-one .primary-btn-outline:focus {
+			background: var(--primary-dark);
+			color: var(--white);
+		}
+
+		.features-style-one .deactive.primary-btn-outline {
+			color: var(--dark-3);
+			border-color: var(--gray-4);
+			pointer-events: none;
+		}
+
+		/*===========================
+  Features One CSS 
+===========================*/
+		.features-one {
+			background-color: var(--light-2);
+			padding-top: 120px;
+			/* padding-bottom: 120px; */
+		}
+
+		.features-one .section-title {
+			padding-bottom: 10px;
+		}
+
+		.features-one .title {
+			font-size: 44px;
+			font-weight: 600;
+			color: var(--black);
+			line-height: 55px;
+		}
+
+		@media (max-width: 767px) {
+			.features-one .title {
+				font-size: 30px;
+				line-height: 35px;
+			}
+		}
+
+		.features-one .text {
+			font-size: 16px;
+			line-height: 24px;
+			color: var(--dark-3);
+			margin-top: 24px;
+		}
+
+		.features-style-one {
+			background-color: var(--white);
+			padding: 40px 20px;
+			/* margin-top: 40px; */
+			box-shadow: var(--shadow-2);
+			border-radius: 4px;
+			transition: all 0.3s;
+		}
+
+		.features-style-one:hover {
+			box-shadow: var(--shadow-4);
+		}
+
+		.features-style-one .features-icon {
+			position: relative;
+			display: inline-block;
+			z-index: 1;
+			height: 70px;
+			width: 70px;
+			line-height: 100px;
+			text-align: center;
+			font-size: 40px;
+			color: var(--primary);
+			border: 2px solid rgba(187, 187, 187, 0.192);
+			border-radius: 50%;
+			-webkit-transition: all 0.3s ease-out 0s;
+			-moz-transition: all 0.3s ease-out 0s;
+			-ms-transition: all 0.3s ease-out 0s;
+			-o-transition: all 0.3s ease-out 0s;
+			transition: all 0.3s ease-out 0s;
+		}
+
+		@media (max-width: 767px) {
+			.features-style-one .features-icon {
+				height: 70px;
+				width: 70px;
+				line-height: 70px;
+				font-size: 35px;
+			}
+		}
+
+		.features-style-one:hover .features-icon {
+			border-color: transparent;
+			color: var(--white);
+			background-color: var(--primary);
+		}
+
+		.features-style-one .features-content {
+			margin-top: 24px;
+		}
+
+		.features-style-one .features-title {
+			font-size: 26px;
+			line-height: 35px;
+			font-weight: 600;
+			color: var(--black);
+			-webkit-transition: all 0.3s ease-out 0s;
+			-moz-transition: all 0.3s ease-out 0s;
+			-ms-transition: all 0.3s ease-out 0s;
+			-o-transition: all 0.3s ease-out 0s;
+			transition: all 0.3s ease-out 0s;
+		}
+
+		@media only screen and (min-width: 992px) and (max-width: 1199px),
+		(max-width: 767px) {
+			.features-style-one .features-title {
+				font-size: 22px;
+			}
+		}
+
+		.features-style-one .text {
+			color: var(--dark-3);
+			margin-top: 16px;
+		}
+
+		.features-style-one .features-btn {
+			margin-top: 32px;
+		}
+
+		/* ===== Buttons Css ===== */
+		.header-one .header-content-area .primary-btn-outline {
+			border-color: var(--primary);
+			color: var(--primary);
+		}
+
+		.header-one .header-content-area .active.primary-btn-outline,
+		.header-one .header-content-area .primary-btn-outline:hover,
+		.header-one .header-content-area .primary-btn-outline:focus {
+			background: var(--primary-dark);
+			color: var(--white);
+		}
+
+		.header-one .header-content-area .deactive.primary-btn-outline {
+			color: var(--dark-3);
+			border-color: var(--gray-4);
+			pointer-events: none;
+		}
+
+		/*===== HEADER ONE =====*/
+		.header-one {
+			position: relative;
+		}
+
+		.header-one .header-content-area {
+			background-color: var(--primary);
+			position: relative;
+			padding: 130px 0;
+		}
+
+		@media only screen and (min-width: 768px) and (max-width: 991px) {
+			.header-one .header-content-area {
+				padding: 100px 0;
+			}
+		}
+
+		@media (max-width: 767px) {
+			.header-one .header-content-area {
+				padding: 60px 0;
+			}
+		}
+
+		@media only screen and (min-width: 1400px) {
+			.header-one .header-content-area {
+				height: 900px;
+			}
+		}
+
+		@media (max-width: 767px) {
+			.header-one .header-content-area {
+				height: 550px;
+			}
+		}
+
+		.header-one .header-content-area .primary-btn-outline {
+			border-color: var(--white);
+			background-color: var(--white);
+			color: var(--primary);
+		}
+
+
+
+		.header-one .header-wrapper {
+			position: relative;
+		}
+
+		.header-one .header-content {
+			max-width: 540px;
+			position: relative;
+			z-index: 5;
+		}
+
+		.header-one .header-title {
+			color: var(--white);
+			font-weight: 800;
+		}
+
+		.header-one .text-lg {
+			color: var(--white);
+			font-weight: 300;
+			margin-top: 16px;
+		}
+
+		.header-one .header-btn {
+			margin-top: 40px;
+		}
+
+		.header-one .header-image {
+			text-align: center;
+		}
+
+		.header-one .header-image .image {
+			max-width: 730px;
+		}
+
+		@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+			.header-one .header-image .image {
+				max-width: 600px;
+			}
+		}
+
+		@media only screen and (min-width: 992px) and (max-width: 1199px) {
+			.header-one .header-image .image {
+				max-width: 550px;
+			}
+		}
+
+		.header-one .header-image .image img {
+			width: 100%;
+		}
+
+		.header-one .header-shape {
+			position: absolute;
+			bottom: -1px;
+			left: 0;
+			right: 0;
+			width: 100%;
+		}
+
+		.header-one .header-shape img {
+			width: 100%;
+		}
+
+		/*===== SLIDER THREE =====*/
+		.slider-three {
+			background-color: var(--light-2);
+			padding-top: 112px;
+			padding-bottom: 130px;
+		}
+
+		.slider-three .section-title .title {
+			font-size: 44px;
+			line-height: 55px;
+			font-weight: 600;
+			color: var(--black);
+		}
+
+		@media (max-width: 767px) {
+			.slider-three .section-title .title {
+				font-size: 28px;
+				line-height: 32px;
+			}
+		}
+
+		.slider-three .section-title .text {
+			color: var(--dark-3);
+			margin-top: 24px;
+		}
+
+		.slider-three .slider-items-wrapper {
+			position: relative;
+		}
+
+		.slider-three .slider-items-wrapper .tns-nav {
+			width: 100%;
+			z-index: 2;
+			display: flex;
+			justify-content: center;
+			margin-top: 40px;
+		}
+
+		.slider-three .slider-items-wrapper .tns-nav button {
+			width: 10px;
+			height: 10px;
+			border-radius: 50px;
+			background-color: var(--primary);
+			opacity: 0.5;
+			border: 0;
+			margin: 0 5px;
+			-webkit-transition: all 0.4s ease-out 0s;
+			-moz-transition: all 0.4s ease-out 0s;
+			-ms-transition: all 0.4s ease-out 0s;
+			-o-transition: all 0.4s ease-out 0s;
+			transition: all 0.4s ease-out 0s;
+		}
+
+		.slider-three .slider-items-wrapper .tns-nav button.tns-nav-active {
+			width: 20px;
+			opacity: 1;
+			border-radius: 5px;
+		}
+
+		.slider-three .single-items-one {
+			margin-top: 40px;
+		}
+
+		.slider-three .single-items-one img {
+			width: 100%;
+			box-shadow: var(--shadow-2);
+			border-radius: 10px;
+		}
+
+		/*===========================
+    clients-01 css 
+===========================*/
+		.client-logo-area .section-title-two {
+			text-align: center;
+			max-width: 550px;
+			margin: auto;
+			margin-bottom: 50px;
+			position: relative;
+			z-index: 5;
+		}
+
+		@media only screen and (min-width: 768px) and (max-width: 991px) {
+			.client-logo-area .section-title-two {
+				margin-bottom: 45px;
+			}
+		}
+
+		@media (max-width: 767px) {
+			.client-logo-area .section-title-two {
+				margin-bottom: 35px;
+			}
+		}
+
+		.client-logo-area .section-title-two span {
+			text-transform: capitalize;
+			color: var(--white);
+			background: var(--primary);
+			display: inline-block;
+			margin-bottom: 10px;
+			padding: 5px 15px;
+			border-radius: 4px;
+		}
+
+		.client-logo-area .section-title-two h2 {
+			margin-bottom: 15px;
+		}
+
+		@media only screen and (min-width: 768px) and (max-width: 991px) {
+			.client-logo-area .section-title-two h2 {
+				font-size: 2rem;
+				line-height: 2.8rem;
+			}
+		}
+
+		@media (max-width: 767px) {
+			.client-logo-area .section-title-two h2 {
+				font-size: 1.5rem;
+				line-height: 1.9rem;
+			}
+		}
+
+		.client-logo-area .section-title-two p {
+			color: var(--dark-3);
+		}
+
+		/*===== Client Logo One =====*/
+		.client-logo-one {
+			padding-top: 100px;
+			padding-bottom: 100px;
+		}
+
+		.client-logo-one .single-client {
+			margin-top: 30px;
+		}
+
+		/*===== FOOTER ONE =====*/
+		.footer-one {
+			background-color: var(--light-2);
+		}
+
+		.footer-one .footer-logo {
+			margin-top: 30px;
+		}
+
+		.footer-one .footer-widget {
+			padding-top: 70px;
+			padding-bottom: 100px;
+		}
+
+		@media only screen and (min-width: 768px) and (max-width: 991px) {
+			.footer-one .footer-widget {
+				padding-top: 40px;
+				padding-bottom: 70px;
+			}
+		}
+
+		@media (max-width: 767px) {
+			.footer-one .footer-widget {
+				padding-top: 20px;
+				padding-bottom: 50px;
+			}
+		}
+
+		.footer-one .footer-title {
+			font-size: 18px;
+			font-weight: 600;
+			line-height: 22px;
+			color: var(--black);
+			position: relative;
+		}
+
+		.footer-one .footer-app-store {
+			padding-top: 22px;
+		}
+
+		.footer-one .footer-app-store .download-title {
+			font-size: 15px;
+			display: block;
+			margin-bottom: 15px;
+			font-weight: 500;
+			color: var(--dark-1);
+		}
+
+		.footer-one .footer-app-store li {
+			display: inline-block;
+			margin-right: 8px;
+		}
+
+		.footer-one .footer-app-store li img {
+			max-width: 140px;
+		}
+
+		@media only screen and (min-width: 992px) and (max-width: 1199px) {
+			.footer-one .footer-app-store li {
+				margin-right: 6px;
+			}
+		}
+
+		.footer-one .footer-app-store li:last-child {
+			margin-right: 0;
+		}
+
+		@media (max-width: 767px) {
+			.footer-one .footer-app-store li {
+				width: 120px;
+				display: block;
+				margin-bottom: 10px;
+			}
+
+			.footer-one .footer-app-store li:last-child {
+				margin: 0;
+			}
+		}
+
+		@media only screen and (min-width: 576px) and (max-width: 767px) {
+			.footer-one .footer-app-store li {
+				width: auto;
+			}
+		}
+
+		.footer-one .footer-app-store li a {
+			-webkit-transition: all 0.2s ease-out 0s;
+			-moz-transition: all 0.2s ease-out 0s;
+			-ms-transition: all 0.2s ease-out 0s;
+			-o-transition: all 0.2s ease-out 0s;
+			transition: all 0.2s ease-out 0s;
+		}
+
+		.footer-one .footer-app-store li a:hover {
+			box-shadow: var(--shadow-4);
+			-webkit-transform: translateY(-4px);
+			-moz-transform: translateY(-4px);
+			-ms-transform: translateY(-4px);
+			-o-transform: translateY(-4px);
+			transform: translateY(-4px);
+		}
+
+		.footer-one .f-about {
+			margin-top: 30;
+		}
+
+		.footer-one .f-about .text {
+			margin-top: 20px;
+		}
+
+		@media only screen and (min-width: 1200px) and (max-width: 1399px),
+		only screen and (min-width: 1400px) {
+			.footer-one .f-about {
+				padding-right: 200px;
+			}
+		}
+
+		.footer-one .footer-link {
+			margin-top: 30px;
+		}
+
+		.footer-one .footer-link ul {
+			margin-top: 8px;
+		}
+
+		.footer-one .footer-link ul a {
+			font-size: 16px;
+			line-height: 24px;
+			color: var(--dark-3);
+			margin-top: 16px;
+			font-weight: 400;
+			-webkit-transition: all 0.3s ease-out 0s;
+			-moz-transition: all 0.3s ease-out 0s;
+			-ms-transition: all 0.3s ease-out 0s;
+			-o-transition: all 0.3s ease-out 0s;
+			transition: all 0.3s ease-out 0s;
+		}
+
+		@media (max-width: 767px) {
+			.footer-one .footer-link ul a {
+				margin-top: 12px;
+			}
+		}
+
+		.footer-one .footer-link ul a:hover {
+			color: var(--primary);
+		}
+
+		.footer-one .footer-contact {
+			margin-top: 30px;
+		}
+
+		.footer-one .footer-contact ul {
+			margin-top: 24px;
+		}
+
+		.footer-one .footer-contact ul li {
+			display: block;
+			margin-top: 15px;
+			position: relative;
+			padding-left: 24px;
+			color: var(--dark-3);
+		}
+
+		.footer-one .footer-contact ul li:first-child {
+			margin: 0;
+		}
+
+		.footer-one .footer-contact ul li i {
+			font-size: 18px;
+			position: absolute;
+			left: 0;
+			top: 4px;
+		}
+
+		.footer-one .footer-copyright {
+			border-top: 1px solid var(--gray-4);
+		}
+
+		.footer-one .copyright {
+			padding-bottom: 23px;
+			padding-top: 13px;
+		}
+
+		.footer-one .copyright .text {
+			color: var(--dark-3);
+			margin-top: 10px;
+		}
+
+		.footer-one .social {
+			margin-top: 10px;
+		}
+
+		.footer-one .social li {
+			display: inline-block;
+			margin-right: 15px;
+		}
+
+		.footer-one .social li:last-child {
+			margin-right: 0;
+		}
+
+		.footer-one .social li a {
+			font-size: 18px;
+			color: var(--dark-3);
+			-webkit-transition: all 0.3s ease-out 0s;
+			-moz-transition: all 0.3s ease-out 0s;
+			-ms-transition: all 0.3s ease-out 0s;
+			-o-transition: all 0.3s ease-out 0s;
+			transition: all 0.3s ease-out 0s;
+		}
+
+		.footer-one .social li a:hover {
+			color: var(--primary);
+		}
+	</style>
+	<!--====== FOOTER ONE PART ENDS ======-->
+	<!-- Option 1: Bootstrap Bundle with Popper -->
+	<script src="{%static '/js/bootstrap.bundle.js'%}"></script>
+	<script src="{%static '/js/bootstrap.bundle.min.js'%}"></script>
+	<!-- Photo by Leeloo Thefirst: https://www.pexels.com/photo/question-mark-on-crumpled-paper-5428826/ -->
+	<!-- <a href="https://www.freepik.com/free-photo/network-connections_2052331.htm#page=2&query=fintech%20background&position=13&from_view=search&track=ais&uuid=9e60228d-acc8-4d4e-8bd4-5904305f7cd9">Image by kjpargeter</a> on Freepik -->
+	<!-- <a href="https://www.freepik.com/free-photo/vivid-blurred-colorful-background_16618863.htm#query=gradient%20background&position=1&from_view=keyword&track=ais&uuid=e7d48121-59e5-4b73-87c8-3d4fa9e57cab">Image by user3802032</a> on Freepik -->
+	<!-- <a href="https://www.freepik.com/free-vector/realistic-front-view-smartphone-mockup-mobile-iphone-purple-frame-with-blank-white-display-vector_33632332.htm#query=mobile&position=0&from_view=search&track=sph&uuid=0f50c6fb-de3f-46dd-aaf9-5e1de0682414">Image by svstudioart</a> on Freepik -->
+</body>
+
 </html>
