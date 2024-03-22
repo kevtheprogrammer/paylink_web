@@ -1,0 +1,33 @@
+# import os
+# import sys
+# #
+# # assuming your django settings file is at '/home/zerobytz/mysite/mysite/settings.py'
+# # and your manage.py is is at '/home/zerobytz/mysite/manage.py'
+# path = '/home/zerobytz/web'
+# if path not in sys.path:
+#     sys.path.append(path)
+
+# os.environ['DJANGO_SETTINGS_MODULE'] = 'ekamo_web_app.settings'
+
+# # then:
+# from django.core.wsgi import get_wsgi_application
+# application = get_wsgi_application()
+
+
+# +++++++++++ DJANGO +++++++++++
+# To use your own django app use code like this:
+import os
+import sys
+#
+# assuming your django settings file is at '/home/zerobytz/mysite/mysite/settings.py'
+# and your manage.py is is at '/home/zerobytz/mysite/manage.py'
+path = '/home/zerobytz/paylink/paylink_web'
+if path not in sys.path:
+    sys.path.append(path)
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'paylink_web.settings'
+
+# then:
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
+
