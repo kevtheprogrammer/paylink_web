@@ -1,1390 +1,832 @@
 {%load static%}
 
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<!-- Required meta tags -->
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="{%static '/css/bootstrap.css'%}" />
-	<link rel="stylesheet" href="{%static '/css/bootstrap.min.css'%}" />
-	<link rel="stylesheet" href="{%static '/css/bootstrap.rtl.min.css'%}" />
-	<link rel="stylesheet" href="{%static '/fontawesome-free-6.5.1-web/css/all.css'%}" />
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;600;900&display=swap" rel="stylesheet" />
-	<!-- --bs-primary: #FF9B05;
-		--bs-secondary: #001737; -->
-	<!--====== Tiny Slider Css ======-->
-	<link rel="stylesheet" href="https://cdn.ayroui.com/1.0/css/tiny-slider.css" />
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
-	<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-	<style>
-		body {
-			margin: 0;
-			font-family: "Poppins", sans-serif;
-			background-color: #fff;
-			/* background: linear-gradient(
-					104deg,
-					rgba(0, 0, 0, 1) 1%,
-					rgba(0, 23, 55, 1) 50%,
-					rgba(38, 104, 161, 1) 80%
-				); */
-			/* background-size: 100% 100%;
-				background-repeat: no-repeat; */
-			/* background-image: url("./assets/img/bg_dark.jpg"); */
-			/* background-position: center; */
-		}
+  <script type="module">
+    import RefreshRuntime from "/@react-refresh"
+    RefreshRuntime.injectIntoGlobalHook(window)
+    window.$RefreshReg$ = () => { }
+    window.$RefreshSig$ = () => (type) => type
+    window.__vite_plugin_react_preamble_installed__ = true
+  </script>
 
-		.nav {
-			background: rgba(255, 255, 255, 0.2);
-			backdrop-filter: blur(10px);
-			padding: 20px;
-			box-shadow: 0 4px 6px rgba(255, 255, 255, 0);
-		}
+  <script type="module" src="/@vite/client"></script>
 
-		.f-poppins {
-			font-family: "Poppins", sans-serif;
-		}
+  <meta charset="UTF-8">
+  <!-- <link rel="icon" type="image/svg+xml" href="/hoobank.svg" /> -->
 
-		#from_top,
-		.top_web {
-			display: none;
-			/* Hide initially */
-		}
+  <link rel="apple-touch-icon" sizes="152x152" href="{% static '/public/apple-touch-icon.png'%}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static '/public/favicon-32x32.png'%}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static '/public/favicon-16x16.png' %}">
+  <link rel="manifest" href="./public/site.webmanifest">
+  <link rel="mask-icon" href="./public/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
 
-		.hidden {
-			opacity: 0;
-			transform: translateY(30px);
-			/* Start off-screen */
-			transition: opacity 1s ease, transform 1s ease;
-		}
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PayLink</title>
 
-		.show {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	</style>
-	<title>Paylink Zambia</title>
+  <!-- DAISY UI -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.3/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- TAILWIND CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- tailwind config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#00040f",
+            secondary: "#00f6ff",
+            dimWhite: "rgba(255, 255, 255, 0.7)",
+            dimBlue: "rgba(9, 151, 124, 0.1)",
+          },
+          fontFamily: {
+            poppins: ["Poppins", "sans-serif"],
+          },
+        },
+        screens: {
+          xs: "480px",
+          ss: "620px",
+          sm: "768px",
+          md: "1060px",
+          lg: "1200px",
+          xl: "1700px",
+        },
+      }
+    }
+  </script>
+
+  <!-- SWIPER CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- INDEX CSS -->
+  <style type="text/css">
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
+
+
+    :root {
+      --black-gradient: linear-gradient(144.39deg,
+          #ffffff -278.56%,
+          #6d6d6d -78.47%,
+          #11101d 91.61%);
+      --card-shadow: 0px 20px 100px -10px rgba(66, 71, 91, 0.1);
+    }
+
+    * {
+      scroll-behavior: smooth;
+    }
+
+    .text-gradient {
+      background: radial-gradient(64.18% 64.18% at 71.16% 35.69%,
+          #def9fa 0.89%,
+          #bef3f5 17.23%,
+          #9dedf0 42.04%,
+          #7de7eb 55.12%,
+          #5ce1e6 71.54%,
+          #33bbcf 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
+
+    .bg-blue-gradient {
+      background: linear-gradient(157.81deg,
+          #def9fa -43.27%,
+          #bef3f5 -21.24%,
+          #9dedf0 12.19%,
+          #7de7eb 29.82%,
+          #5ce1e6 51.94%,
+          #33bbcf 90.29%);
+    }
+
+    .bg-black-gradient {
+      background: linear-gradient(144.39deg,
+          #ffffff -278.56%,
+          #6d6d6d -78.47%,
+          #11101d 91.61%);
+    }
+
+    .bg-black-gradient-2 {
+      background: linear-gradient(-168.39deg,
+          #ffffff -278.56%,
+          #6d6d6d -78.47%,
+          #11101d 91.61%);
+    }
+
+    .bg-gray-gradient {
+      background: linear-gradient(153.47deg,
+          rgba(255, 255, 255, 0) -341.94%,
+          #14101d 95.11%);
+    }
+
+    .bg-discount-gradient {
+      background: linear-gradient(125.17deg, #272727 0%, #11101d 100%);
+    }
+
+    .box-shadow {
+      box-shadow: 0px 20px 100px -10px rgba(66, 71, 91, 0.1);
+    }
+
+    .sidebar {
+      -webkit-animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+      animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+
+    @-webkit-keyframes slide-top {
+      0% {
+        transform: translateY(100px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slide-top {
+      0% {
+        transform: translateY(100px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    .feature-card:hover {
+      background: var(--black-gradient);
+      box-shadow: var(--card-shadow);
+    }
+
+    .feedback-container .feedback-card:last-child {
+      margin-right: 0px;
+    }
+
+    .feedback-card {
+      background: transparent;
+    }
+
+    .feedback-card:hover {
+      background: var(--black-gradient);
+    }
+
+    .client-card {
+      background: linear-gradient(180deg,
+          #ffffff -20.56%,
+          #6d6d6d -78.47%,
+          #11101d 91.61%);
+    }
+
+    /* background-color: #4158D0;
+background-image: linear-gradient(180deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%); */
+
+    /* background-color: #4158D0;
+background-image: linear-gradient(180deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%); */
+
+    .blue__gradient {
+      background: linear-gradient(180deg, rgba(188, 165, 255, 0) 0%, #214d76 100%);
+      filter: blur(123px);
+    }
+
+    .pink__gradient {
+      background: linear-gradient(90deg, #f4c4f3 0%, #fc67fa 100%);
+      filter: blur(900px);
+    }
+
+    .white__gradient {
+      background: rgba(255, 255, 255, 0.6);
+      filter: blur(750px);
+    }
+
+    /* hero animation */
+
+    #heroAnimation h1 {
+      color: transparent;
+
+      width: -webkit-fit-content;
+
+      width: -moz-fit-content;
+
+      width: fit-content;
+      position: relative;
+      -webkit-animation: text_reveal .5s ease forwards;
+      animation: text_reveal .5s ease forwards;
+      -webkit-animation-delay: 1s;
+      animation-delay: 1s;
+    }
+
+    #heroAnimation h1:nth-child(1) {
+      -webkit-animation-delay: 1s;
+      animation-delay: 1s;
+    }
+
+    #heroAnimation h1:nth-child(2) {
+      /* background: radial-gradient(
+  64.18% 64.18% at 71.16% 35.69%,
+  #def9fa 0.89%,
+  #bef3f5 17.23%,
+  #9dedf0 42.04%,
+  #7de7eb 55.12%,
+  #5ce1e6 71.54%,
+  #33bbcf 100%
+);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+text-fill-color: transparent; */
+
+      -webkit-animation: text_reveal_name .5s ease forwards;
+
+      animation: text_reveal_name .5s ease forwards;
+      -webkit-animation-delay: 2s;
+      animation-delay: 2s;
+    }
+
+    #heroAnimation h1 span {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0;
+      background: radial-gradient(64.18% 64.18% at 71.16% 35.69%,
+          /* #def9fa 0.89%,
+  #bef3f5 17.23%, */
+          #9dedf0 42.04%,
+          #7de7eb 55.12%,
+          #5ce1e6 71.54%,
+          #33bbcf 100%);
+      ;
+      -webkit-animation: text_reveal-box 1s ease;
+      ;
+      animation: text_reveal-box 1s ease;
+      -webkit-animation-delay: .3s;
+      animation-delay: .3s;
+    }
+
+    #heroAnimation h1:nth-child(1) span {
+      -webkit-animation-delay: .5s;
+      animation-delay: .5s;
+    }
+
+    #heroAnimation h1:nth-child(2) span {
+      -webkit-animation-delay: 1.5s;
+      animation-delay: 1.5s;
+    }
+
+    @-webkit-keyframes text_reveal {
+      100% {
+        color: #fff;
+      }
+    }
+
+    @keyframes text_reveal {
+      100% {
+        color: #fff;
+      }
+    }
+
+    @-webkit-keyframes text_reveal_name {
+      100% {
+        background: radial-gradient(64.18% 64.18% at 71.16% 35.69%,
+            #def9fa 0.89%,
+            #bef3f5 17.23%,
+            #9dedf0 42.04%,
+            #7de7eb 55.12%,
+            #5ce1e6 71.54%,
+            #33bbcf 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+
+      }
+    }
+
+    @keyframes text_reveal_name {
+      100% {
+        background: radial-gradient(64.18% 64.18% at 71.16% 35.69%,
+            #def9fa 0.89%,
+            #bef3f5 17.23%,
+            #9dedf0 42.04%,
+            #7de7eb 55.12%,
+            #5ce1e6 71.54%,
+            #33bbcf 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+
+      }
+    }
+
+    @-webkit-keyframes text_reveal-box {
+      50% {
+        width: 100%;
+        left: 0;
+      }
+
+      100% {
+        width: 0;
+        left: 100%;
+      }
+    }
+
+    @keyframes text_reveal-box {
+      50% {
+        width: 100%;
+        left: 0;
+      }
+
+      100% {
+        width: 0;
+        left: 100%;
+      }
+    }
+
+    .swiper-wrapper {
+      display: flex;
+      /* justify-content: center; */
+      /* align-items: stretch */
+      /* align-items: center; */
+      /* flex-wrap: wrap; */
+    }
+
+    /* .swiper-pagination{
+margin-top: 30px;
+} */
+
+    @media (max-width: 640px) {
+      .mySwiper .swiper-slide .client-card {
+        /* Example to stack elements vertically */
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .mySwiper .swiper-slide img {
+        /* Adjust the image size for small screens */
+        width: 150px;
+        /* Example size, adjust as needed */
+      }
+    }
+
+    /* PROGRESS BAR */
+
+    .progress-6 {
+      width: 200px;
+      height: 22px;
+      border-radius: 20px;
+      color: #78E4EA;
+      border: 2px solid;
+      position: relative;
+    }
+
+    .progress-6::before {
+      content: "";
+      position: absolute;
+      margin: 2px;
+      inset: 0 100% 0 0;
+      border-radius: inherit;
+      background: currentColor;
+      -webkit-animation: p6 2.6s normal;
+      animation: p6 2.6s normal;
+    }
+
+    @-webkit-keyframes p6 {
+      100% {
+        inset: 0;
+      }
+    }
+
+    @keyframes p6 {
+      100% {
+        inset: 0;
+      }
+    }
+
+    /* ***** */
+  </style>
+
 </head>
 
-<body class="bg-light">
-	<script>
-
-
-		$(document).ready(function () {
-			const observer = new IntersectionObserver((entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						entry.target.classList.add('show');
-					} else {
-						entry.target.classList.remove('show');
-					}
-				});
-			});
-
-			const hiddenElements = document.querySelectorAll('.hidden');
-			hiddenElements.forEach((e) => observer.observe(e));
-			// Slide down the element from the top
-			$("#from_top").slideDown(1500);
-			// Slide in top_mobile from the right
-			$(".top_mobile")
-				.animate({ opacity: 1 }, 0.5)
-				.animate({ right: "40" }, 800);
-
-			// Slide in top_text from the top
-			$(".top_web").fadeIn(1000);
-			//    animate({opacity: 1}, 500).animate({bottom: "0"}, 800);
-
-			// Typing effect for top_text content
-			var textToType = $(".top_text").text();
-			$(".top_text").empty(); // Clear existing text
-			var i = 0;
-			function typeText() {
-				if (i < textToType.length) {
-					$(".top_text").append(textToType.charAt(i));
-					i++;
-					setTimeout(typeText, 300); // Adjust typing speed (milliseconds)
-				}
-			}
-			typeText();
-		});
-	</script>
-
-	<section class="hidden bg-secondary">
-
-		<div class="content">
-			<div style="border-bottom: 1px solid rgb(51, 86, 119)"
-				class="container-md text-white d-flex justify-content-between py-3  hidden-mobile" hidden>
-				<div class="logo  hidden-mobile">
-					<img src="{%static '/img/image4.png'%}" alt="" width="25%"
-						style="position: relative; right: 0.5rem;">
-
-				</div>
-
-			</div>
-			<nav class="navbar nav sticky-top navbar-expand-lg navbar-dark bg-secondary">
-				<div class="container-md">
-					<div class="collapse navbar-collapse" id="navbarNav">
-						<ul class="navbar-nav">
-							<li class="nav-item">
-								<a class="nav-link active" aria-current="page" href="#">Home</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#products">Products</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#services">Services</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link disabled" href="#footer" tabindex="-1"
-									aria-disabled="true">Contact</a>
-							</li>
-						</ul>
-					</div>
-					<span class="navbar-text d-none d-xl-block">
-						<span class="mx-2"><i class="fa-brands fa-facebook"></i></span>
-						<span class="mx-2"><i class="fa-brands fa-instagram"></i></span>
-						<span class="mx-2"><i class="fa-brands fa-square-whatsapp"></i></span>
-					</span>
-				</div>
-			</nav>
-		</div>
-		<div class="top_bg d-flex align-items-center">
-			<div class="d-flex justify-content-between text-white container-md">
-				<div class="tex col-xl-5 col-md-5">
-					<div id="from_top" class="col-12">
-						<div class="display-4 f-poppins" style="font-weight: bolder">
-							We Are Paylink
-						</div>
-						<div class="my-2"></div>
-						We aspire to lead at the forefront of technological advancements, setting the standard for
-						innovation and excellence in the Pan-African tech landscape.
-					</div>
-					<div id="from_top	" class="col-xl-12 d-flex align-items-center my-3 justify-content-between">
-						<a href="" class="btn btn-primary rounded-pill p-3 col-xl-5">Get Started</a>
-						<div class="d-flex justify-content-between d-none d-xl-block">
-
-						</div>
-					</div>
-				</div>
-				<style>
-					.top_bg {
-						height: 694px;
-						background-image: url('./static/img/back_1.jpg');
-						background-position: center center;
-						background-size: 100% auto;
-						background-repeat: no-repeat;
-					}
-
-					.top_mobile {
-						position: relative;
-						top: 0rem;
-						z-index: 10;
-					}
-
-					.top_web {
-						width: 40%;
-						position: absolute;
-						top: 30%;
-						right: 20%;
-					}
-
-					.top_text {
-						position: absolute;
-						top: 65%;
-						right: 5%;
-						z-index: 20;
-					}
-
-					.text_card {
-						background: rgba(7, 7, 7, 0.704);
-						backdrop-filter: blur(30px);
-						border: 1px solid rgb(189, 189, 189);
-						padding: 20px;
-						border-radius: 4px;
-						width: fit-content;
-					}
-
-					.top_text {
-						background: rgba(88, 88, 88, 0.104);
-						backdrop-filter: blur(30px);
-						border: 1px solid rgb(189, 189, 189);
-						padding: 20px;
-						border-radius: 0px 8px 8px 0px;
-						width: fit-content;
-					}
-
-					@media screen and (max-width: 480px) {
-
-						.top_text,
-						.top_web,
-						.top_mobile {
-							display: none;
-						}
-
-						.top_bg {
-							height: 460px;
-							background-image: url('./static/img/back_1.jpg');
-							background-position: center center;
-							background-size: auto 100%;
-							padding: 20px;
-							background-repeat: no-repeat;
-						}
-					}
-				</style>
-				<div class="col-3  hidden-mobile" style="height: 0px">
-					<img class="top_mobile" src="{%static '/img/image7.png'%}" alt="image of mbile app" srcset=""
-						width='90%' style="position: relative; right: 20rem;  " />
-					<img class="top_web" src="{%static '/img/image11-removebg-preview.png'%}" width='100%'
-						alt="image of web dashboard" srcset="" />
-					<!-- <div class="top_text">Hello, welcome!</div> -->
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section id="products" class="hidden py-5 text-black	" style=" ">
-
-
-		<div class="hidden slider-three" style="">
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-lg-6">
-
-						<!-- section title -->
-					</div>
-				</div>
-				<!-- row -->
-
-				<div class="slider-items-wrapper">
-					<div class="row slider-items-active">
-						<div class="container-md my-5 px-5">
-							<div class="single-items-one">
-								<div class="col-12 col-md-12 my-8" style="padding: 0rem 4rem">
-									<img src="{%static '/img/image1.png' %}" width="50%" alt=""
-										style="position: relative; right: 1.5rem;">
-									<div class="mt-3 h5">HealthLink</div>
-									<div class="p" style="font-size: small; color: 'black';">
-										HealthLink is a cutting-edge web and mobile-based application designed to
-										streamline the connection between insurance companies, healthcare facilities,
-										and beneficiaries.
-									</div>
-								</div>
-							</div>
-							<!-- single-items-one -->
-						</div>
-						<div class="container-md my-5 px-5">
-							<div class="single-items-one">
-								<div class="col-12 col-md-12 my-8" style="padding: 0rem 4rem; ">
-									<img src="{%static '/img/image3.png'%}" width="50%" alt=""
-										style="position: relative; right: 0rem;">
-									<div class="mt-3 h5">SureLink</div>
-									<div class="p" style="font-size: small">
-										SureLink is a comprehensive insurance and reinsurance software solution tailored
-										to meet the unique requirements of businesses.
-									</div>
-								</div>
-							</div>
-							<!-- single-items-one -->
-						</div>
-						<div class="container-md my-5 px-5">
-							<div class="single-items-one">
-								<div class="single-items-one">
-									<div class="col-12 col-md-12 my-8" style=" padding: 0rem 4rem;">
-										<img src="{%static '/img/image2.png'%}" width="100%" alt=""
-											style="position: relative; right: 0.5rem;">
-										<div class="mt-3 h5">LoanLink</div>
-										<div class="p" style="font-size: small">
-											LoanLink is a feature-rich CRM (Customer Relationship Management) software
-											solution designed to meet the diverse needs of businesses, from small-scale
-											enterprises.
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- single-items-one -->
-						</div>
-						<div class="container-md my-5 px-5">
-							<div class="single-items-one">
-								<div class="single-items-one">
-									<div class="single-items-one">
-										<div class="col-12 col-md-12 my-8" style=" padding: 2rem 4rem;">
-											<img src="{%static '/img/clienk-link.png'%}" width="100%" alt=""
-												style="position: relative; right: 0.5rem;">
-											<div class="mt-3 h5">ClientLink</div>
-											<div class="p" style="font-size: small">
-												ClientLink is a feature-rich CRM (Customer Relationship Management)
-												software solution designed to meet the diverse needs of businesses, from
-												small-scale enterprises.
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- single-items-one -->
-						</div>
-					</div>
-					<!-- row -->
-				</div>
-			</div>
-		</div>
-
-		<!-- container -->
-	</section>
-
-	<!--====== SLIDER THREE PART ENDS ======-->
-	</div>
-	</div>
-	</div>
-	</section>
-
-	<!--====== FEATURE ONE PART START ======-->
-	<section id="services" class="hidden features-area features-one bg-light">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-lg-6">
-					<div class="section-title text-center">
-						<h3 class="title">Services Offered by Paylink</h3>
-						<p class="text">
-							At Paylink, we offer a wide range of services tailored to meet the diverse needs of
-							businesses, from small-scale enterprises to large corporations.
-						</p>
-					</div>
-					<!-- row -->
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-7 col-12" style="
-							background-image: url( './static/img/crm.png');
-							background-position: center center;
-							background-size: 100% auto;
-							height: 580px;
-							background-repeat: no-repeat;
-						"></div>
-				<div class="col-md-5 col-12">
-					<!-- row -->
-					<div class="row justify-content-between">
-						<div class="col-lg-6 col-md-7 col-sm-9">
-							<div class="features-style-one text-end">
-								<div class="features-icon">
-									<img src="{%static '/img/saas_4968913.png'%}" alt="Saas" width="70%"
-										style="position: relative; bottom: 1rem;">
-								</div>
-								<div class="features-content">
-									<h4 class="features-title">SaaS Solutions</h4>
-									<p class="text">
-										Our Software as a Service (SaaS) solutions cater to businesses of all sizes,
-										providing customizable solutions according to their unique requirements.
-									</p>
-								</div>
-							</div>
-							<!-- single features -->
-						</div>
-						<div class="col-lg-6 col-md-7 col-sm-9">
-							<div class="features-style-one text-end">
-								<div class="features-icon">
-									<img src="{'%static '/img/marketing_14143198.png'%}" alt="BPO" width="70%"
-										style="position: relative; bottom: 1rem;">
-								</div>
-								<div class="features-content">
-									<h4 class="features-title">BPO Services</h4>
-									<p class="text">
-										Our Business Process Outsourcing (BPO) services are designed to streamline your
-										customer care support operations.
-									</p>
-								</div>
-							</div>
-							<!-- single features -->
-
-						</div>
-						<!-- row -->
-					</div>
-				</div>
-			</div>
-			<!-- container -->
-	</section>
-	<!--====== FEATURE ONE PART ENDS ======-->
-
-	<!--====== HEADER ONE PART START ======-->
-	<section class="hidden ">
-		<div class="header-area header-one bg-secondary text-white">
-
-			<div class="header-content-area">
-				<div class="container">
-					<div class="row align-items-center">
-						<div class="col-lg-6 col-12">
-							<div class="header-wrapper">
-								<div class="header-content">
-									<h1 class="header-title">
-										Mobile Development
-									</h1>
-									<p class="text-lg">
-										To leverage technology to empower businesses, enhance efficiency, and drive
-										growth. Committed to providing top-notch technological services tailored to the
-										unique needs of businesses, we ensure they not only adapt but thrive in the
-										ever-evolving digital era.
-									</p>
-									<div class="header-btn rounded-buttons">
-										<a class="btn primary-btn-outline btn-lg" href="javascript:void(0)">
-											Call Us Now !
-										</a>
-									</div>
-								</div>
-								<!-- header content -->
-							</div>
-						</div>
-						<div class="col-lg-6 col-12">
-							<div class="header-image d-none d-lg-block">
-								<div class="image">
-									<img src="{%static '/img/image7.png'%}" alt=""
-										style="position: relative; bottom: 0rem; width:50%">
-
-
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- row -->
-				</div>
-				<!-- container -->
-				<div class="header-shape">
-					<img src="https://cdn.ayroui.com/1.0/images/header/header-shape.svg" alt="shape" />
-				</div>
-				<!-- header-shape -->
-			</div>
-
-		</div>
-
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-lg-6">
-
-					<!-- section title -->
-				</div>
-			</div>
-			<!-- row -->
-
-			<div class="hidden slider-three" style="background-color: white;">
-				<div class="container">
-					<div class="row justify-content-center">
-						<div class="col-lg-6">
-							<div class="section-title">
-								<div class="header text-center">
-									<h3 class="title">Friendly & Easy</h3>
-								</div>
-								<p class="text">
-								<ul class="list-text" style="ul li{list-style:none}">
-									<span>&rArr;</span> <span>Scalable solutions for small-scale to enterprise
-										businesses</span><br>
-									<span>&rArr;</span> <span>Cloud-based services enabling seamless third-party
-										integrations</span><br>
-									<span>&rArr;</span> <span>Dynamic applications that evolve with your business</span>
-								</ul>
-								</p>
-							</div>
-							<!-- section title -->
-						</div>
-					</div>
-					<!-- row -->
-
-					<div class="slider-items-wrapper">
-						<div class="row slider-items-active">
-							<div class="col-lg-4">
-								<div class="single-items-one">
-									<img src="{%static '/img/crm-1.jpg'%}" alt="Image" />
-								</div>
-								<!-- single-items-one -->
-							</div>
-							<div class="col-lg-4">
-								<div class="single-items-one">
-									<img src="{%static '/img/crm-2.jpg'%}" alt="Image" />
-								</div>
-								<!-- single-items-one -->
-							</div>
-							<div class="col-lg-4">
-								<div class="single-items-one">
-									<img src="{%static '/img/crm-3.jpg'%}" alt="Image" />
-								</div>
-								<!-- single-items-one -->
-							</div>
-							<!-- <div class="col-lg-4">
-							<div class="single-items-one">
-								<img src="{%static '/img/crm-4.jpg'%}" alt="Image" />
-							</div>
-							<!-- single-items-one 
-						</div> -->
-						</div>
-						<!-- row -->
-					</div>
-				</div>
-			</div>
-
-
-
-
-
-			<!-- container -->
-	</section>
-
-	<!--====== SLIDER THREE PART ENDS ======-->
-
-	<!--====== Tiny Slider js ======-->
-	<script src="https://cdn.ayroui.com/1.0/js/tiny-slider.js"></script>
-
-	<script>
-		//======== tiny slider for slider-items-active
-		tns({
-			autoplay: true,
-			autoplayButtonOutput: false,
-			mouseDrag: true,
-			gutter: 0,
-			container: ".slider-items-active",
-			center: false,
-			nav: true,
-			navPosition: "bottom",
-			controls: false,
-			speed: 400,
-			controlsText: [
-				'<i class="lni lni-arrow-left-circle"></i>',
-				'<i class="lni lni-arrow-right-circle"></i>',
-			],
-			responsive: {
-				0: {
-					items: 1,
-				},
-
-				768: {
-					items: 2,
-				},
-				992: {
-					items: 3,
-				},
-			},
-		});
-	</script>
-	<!--====== CLIENT LOGO PART START ======-->
-	<section class="hidden client-logo-area client-logo-one bg-light">
-		<!--======  Start Section Title Two ======-->
-		<div class="section-title-two">
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
-						<div class="content">
-							<!---<span> Our Partners </span>-->
-							<h2 class="fw-bold">Our Awesome Clients</h2>
-							<p>
-								To leverage technology to empower businesses, enhan ce efficiency, and drive growth.
-								Committed to providing top-notch technological services tailored to the unique needs of
-								businesses, we ensure they not only adapt but thrive in the ever-evolving digital era.
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- container -->
-		</div>
-		<!--====== End Section Title Two ======-->
-		<!--<div class="container">
-			<div class="row">
-				<div class="col-md-2 col-6">
-					<div class="single-client text-center">
-						<img src="https://cdn.ayroui.com/1.0/images/client-logo/graygrids.svg" alt="Logo" />
-					</div>
-					<!-- single client -->
-		</div>
-		<!--<div class="col-md-2 col-6">
-					<div class="single-client text-center">
-						<img src="https://cdn.ayroui.com/1.0/images/client-logo/uideck.svg" alt="Logo" />
-					</div>
-					<!-- single client -->
-		</div>
-		<!--<div class="col-md-2 col-6">
-					<div class="single-client text-center">
-						<img src="https://cdn.ayroui.com/1.0/images/client-logo/ayroui.svg" alt="Logo" />
-					</div>
-					<!-- single client -->
-		</div>
-		</div>
-		<!-- row -->
-		</div>
-		<!-- container -->
-	</section>
-	<!--====== CLIENT LOGO PART ENDS ======-->
-
-	<!--====== HEADER ONE PART START ======-->
-	<section class="hidden ">
-		<div class="header-area header-one btn-primary text-white">
-
-			<div class="header-content-area">
-				<div class="container">
-					<div class="row align-items-center">
-						<div class="col-lg-6 col-12">
-							<div class="header-wrapper">
-								<div class="header-content">
-									<h1 class="header-title">
-										Web Development
-									</h1>
-									<p class="text-lg">
-										To leverage technology to empower businesses, enhance efficiency, and drive
-										growth. Committed to providing top-notch technological services tailored to the
-										unique needs of businesses, we ensure they not only adapt but thrive in the
-										ever-evolving digital era.
-									</p>
-									<div class="header-btn rounded-buttons">
-										<a class="btn primary-btn-outline btn-lg" href="javascript:void(0)">
-											Call Us Now !
-										</a>
-									</div>
-								</div>
-								<!-- header content -->
-							</div>
-						</div>
-						<div class="col-lg-6 col-12">
-							<div class="header-image d-none d-lg-block">
-								<div class="image">
-									<img src="{%static '/img/image8.png'%}" alt=""
-										style="position: relative; bottom: 0rem; width:100%">
-
-
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- row -->
-				</div>
-				<!-- container -->
-				<div class="header-shape">
-					<img src="https://cdn.ayroui.com/1.0/images/header/header-shape.svg" alt="shape" />
-				</div>
-				<!-- header-shape -->
-			</div>
-
-		</div>
-
-
-		<!-- container -->
-	</section>
-
-	<!--====== SLIDER THREE PART ENDS ======-->
-
-	<!--====== FOOTER ONE PART START ======-->
-	<footer id="footer" class="hidden bg-secondary footer-area footer-one text-white">
-		<div class="footer-widget">
-			<div class="container">
-				<div class="row">
-					<div class="col-xl-6 col-lg-4 col-sm-12">
-						<div class="f-about">
-							<div class="footer-logo">
-								<a href="javascript:void(0)">
-									<div class="logo">
-										<img src="{%static '/img/image4.png'%}" alt="" width="50%">
-									</div>
-								</a>
-							</div>
-							<p class="text">
-								We aspire to lead at the forefront of technological advancements.
-							</p>
-						</div>
-					</div>
-					<div class="col-xl-2 col-lg-2 col-sm-4">
-						<div class="footer-link">
-							<h6 class="footer-title">Company</h6>
-							<ul>
-								<li><a href="javascript:void(0)">About</a></li>
-								<li><a href="javascript:void(0)">Contact</a></li>
-								<li><a href="javascript:void(0)">Marketing</a></li>
-							</ul>
-						</div>
-						<!-- footer link -->
-					</div>
-					<div class="col-xl-2 col-lg-3 col-sm-4">
-						<div class="footer-link">
-							<h6 class="footer-title">Services</h6>
-							<ul>
-								<li><a href="javascript:void(0)">Products</a></li>
-								<li><a href="javascript:void(0)">Business</a></li>
-								<li><a href="javascript:void(0)">Developer</a></li>
-								<li><a href="javascript:void(0)">Insights</a></li>
-							</ul>
-						</div>
-						<!-- footer link -->
-					</div>
-					<div class="col-xl-2 col-lg-3 col-sm-4">
-						<!-- Start Footer Contact -->
-						<div class="footer-contact">
-							<h6 class="footer-title">Help & Suuport</h6>
-							<ul>
-								<li>
-									<i class="lni lni-map-marker"></i> H7JM+F44, Heroes Pl, Lusaka, Zambia
-								</li>
-								<li><i class="lni lni-phone-set"></i>+260 977 42 9510 </li>
-								<li><i class="lni lni-envelope"></i>info@paylinkzm.com</li>
-							</ul>
-						</div>
-						<!-- End Footer Contact -->
-					</div>
-				</div>
-				<!-- row -->
-			</div>
-			<!-- container -->
-		</div>
-		<!-- footer widget -->
-		<div class="footer-copyright">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="copyright text-center d-md-flex justify-content-between align-items-center">
-							<p class="text">Copyright © 2024 Paylink. All Rights Reserved</p>
-							<ul class="social">
-								<li>
-									<a href="javascript:void(0)">
-										<i class="lni lni-facebook-filled"></i>
-									</a>
-								</li>
-								<li>
-									<a href="javascript:void(0)">
-										<i class="lni lni-twitter-original"></i>
-									</a>
-								</li>
-								<li>
-									<a href="javascript:void(0)">
-										<i class="lni lni-instagram-filled"></i>
-									</a>
-								</li>
-								<li>
-									<a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a>
-								</li>
-							</ul>
-						</div>
-						<!-- copyright -->
-					</div>
-				</div>
-				<!-- row -->
-			</div>
-			<!-- container -->
-		</div>
-		<!-- footer copyright -->
-	</footer>
-	<style>
-		/* ===== Buttons Css ===== */
-		.features-style-one .primary-btn-outline {
-			border-color: var(--primary);
-			color: var(--primary);
-		}
-
-		.features-style-one .active.primary-btn-outline,
-		.features-style-one .primary-btn-outline:hover,
-		.features-style-one .primary-btn-outline:focus {
-			background: var(--primary-dark);
-			color: var(--white);
-		}
-
-		.features-style-one .deactive.primary-btn-outline {
-			color: var(--dark-3);
-			border-color: var(--gray-4);
-			pointer-events: none;
-		}
-
-		/*===========================
-  Features One CSS 
-===========================*/
-		.features-one {
-			background-color: var(--light-2);
-			padding-top: 120px;
-			/* padding-bottom: 120px; */
-		}
-
-		.features-one .section-title {
-			padding-bottom: 10px;
-		}
-
-		.features-one .title {
-			font-size: 44px;
-			font-weight: 600;
-			color: var(--black);
-			line-height: 55px;
-		}
-
-		@media (max-width: 767px) {
-			.features-one .title {
-				font-size: 30px;
-				line-height: 35px;
-			}
-		}
-
-		.features-one .text {
-			font-size: 16px;
-			line-height: 24px;
-			color: var(--dark-3);
-			margin-top: 24px;
-		}
-
-		.features-style-one {
-			background-color: var(--white);
-			padding: 40px 20px;
-			/* margin-top: 40px; */
-			box-shadow: var(--shadow-2);
-			border-radius: 4px;
-			transition: all 0.3s;
-		}
-
-		.features-style-one:hover {
-			box-shadow: var(--shadow-4);
-		}
-
-		.features-style-one .features-icon {
-			position: relative;
-			display: inline-block;
-			z-index: 1;
-			height: 70px;
-			width: 70px;
-			line-height: 100px;
-			text-align: center;
-			font-size: 40px;
-			color: var(--primary);
-			border: 2px solid rgba(187, 187, 187, 0.192);
-			border-radius: 50%;
-			-webkit-transition: all 0.3s ease-out 0s;
-			-moz-transition: all 0.3s ease-out 0s;
-			-ms-transition: all 0.3s ease-out 0s;
-			-o-transition: all 0.3s ease-out 0s;
-			transition: all 0.3s ease-out 0s;
-		}
-
-		@media (max-width: 767px) {
-			.features-style-one .features-icon {
-				height: 70px;
-				width: 70px;
-				line-height: 70px;
-				font-size: 35px;
-			}
-		}
-
-		.features-style-one:hover .features-icon {
-			border-color: transparent;
-			color: var(--white);
-			background-color: var(--primary);
-		}
-
-		.features-style-one .features-content {
-			margin-top: 24px;
-		}
-
-		.features-style-one .features-title {
-			font-size: 26px;
-			line-height: 35px;
-			font-weight: 600;
-			color: var(--black);
-			-webkit-transition: all 0.3s ease-out 0s;
-			-moz-transition: all 0.3s ease-out 0s;
-			-ms-transition: all 0.3s ease-out 0s;
-			-o-transition: all 0.3s ease-out 0s;
-			transition: all 0.3s ease-out 0s;
-		}
-
-		@media only screen and (min-width: 992px) and (max-width: 1199px),
-		(max-width: 767px) {
-			.features-style-one .features-title {
-				font-size: 22px;
-			}
-		}
-
-		.features-style-one .text {
-			color: var(--dark-3);
-			margin-top: 16px;
-		}
-
-		.features-style-one .features-btn {
-			margin-top: 32px;
-		}
-
-		/* ===== Buttons Css ===== */
-		.header-one .header-content-area .primary-btn-outline {
-			border-color: var(--primary);
-			color: var(--primary);
-		}
-
-		.header-one .header-content-area .active.primary-btn-outline,
-		.header-one .header-content-area .primary-btn-outline:hover,
-		.header-one .header-content-area .primary-btn-outline:focus {
-			background: var(--primary-dark);
-			color: var(--white);
-		}
-
-		.header-one .header-content-area .deactive.primary-btn-outline {
-			color: var(--dark-3);
-			border-color: var(--gray-4);
-			pointer-events: none;
-		}
-
-		/*===== HEADER ONE =====*/
-		.header-one {
-			position: relative;
-		}
-
-		.header-one .header-content-area {
-			background-color: var(--primary);
-			position: relative;
-			padding: 130px 0;
-		}
-
-		@media only screen and (min-width: 768px) and (max-width: 991px) {
-			.header-one .header-content-area {
-				padding: 100px 0;
-			}
-		}
-
-		@media (max-width: 767px) {
-			.header-one .header-content-area {
-				padding: 60px 0;
-			}
-		}
-
-		@media only screen and (min-width: 1400px) {
-			.header-one .header-content-area {
-				height: 900px;
-			}
-		}
-
-		@media (max-width: 767px) {
-			.header-one .header-content-area {
-				height: 550px;
-			}
-		}
-
-		.header-one .header-content-area .primary-btn-outline {
-			border-color: var(--white);
-			background-color: var(--white);
-			color: var(--primary);
-		}
-
-
-
-		.header-one .header-wrapper {
-			position: relative;
-		}
-
-		.header-one .header-content {
-			max-width: 540px;
-			position: relative;
-			z-index: 5;
-		}
-
-		.header-one .header-title {
-			color: var(--white);
-			font-weight: 800;
-		}
-
-		.header-one .text-lg {
-			color: var(--white);
-			font-weight: 300;
-			margin-top: 16px;
-		}
-
-		.header-one .header-btn {
-			margin-top: 40px;
-		}
-
-		.header-one .header-image {
-			text-align: center;
-		}
-
-		.header-one .header-image .image {
-			max-width: 730px;
-		}
-
-		@media only screen and (min-width: 1200px) and (max-width: 1399px) {
-			.header-one .header-image .image {
-				max-width: 600px;
-			}
-		}
-
-		@media only screen and (min-width: 992px) and (max-width: 1199px) {
-			.header-one .header-image .image {
-				max-width: 550px;
-			}
-		}
-
-		.header-one .header-image .image img {
-			width: 100%;
-		}
-
-		.header-one .header-shape {
-			position: absolute;
-			bottom: -1px;
-			left: 0;
-			right: 0;
-			width: 100%;
-		}
-
-		.header-one .header-shape img {
-			width: 100%;
-		}
-
-		/*===== SLIDER THREE =====*/
-		.slider-three {
-			background-color: var(--light-2);
-			padding-top: 112px;
-			padding-bottom: 130px;
-		}
-
-		.slider-three .section-title .title {
-			font-size: 44px;
-			line-height: 55px;
-			font-weight: 600;
-			color: var(--black);
-		}
-
-		@media (max-width: 767px) {
-			.slider-three .section-title .title {
-				font-size: 28px;
-				line-height: 32px;
-			}
-		}
-
-		.slider-three .section-title .text {
-			color: var(--dark-3);
-			margin-top: 24px;
-		}
-
-		.slider-three .slider-items-wrapper {
-			position: relative;
-		}
-
-		.slider-three .slider-items-wrapper .tns-nav {
-			width: 100%;
-			z-index: 2;
-			display: flex;
-			justify-content: center;
-			margin-top: 40px;
-		}
-
-		.slider-three .slider-items-wrapper .tns-nav button {
-			width: 10px;
-			height: 10px;
-			border-radius: 50px;
-			background-color: var(--primary);
-			opacity: 0.5;
-			border: 0;
-			margin: 0 5px;
-			-webkit-transition: all 0.4s ease-out 0s;
-			-moz-transition: all 0.4s ease-out 0s;
-			-ms-transition: all 0.4s ease-out 0s;
-			-o-transition: all 0.4s ease-out 0s;
-			transition: all 0.4s ease-out 0s;
-		}
-
-		.slider-three .slider-items-wrapper .tns-nav button.tns-nav-active {
-			width: 20px;
-			opacity: 1;
-			border-radius: 5px;
-		}
-
-		.slider-three .single-items-one {
-			margin-top: 40px;
-		}
-
-		.slider-three .single-items-one img {
-			width: 100%;
-			box-shadow: var(--shadow-2);
-			border-radius: 10px;
-		}
-
-		/*===========================
-    clients-01 css 
-===========================*/
-		.client-logo-area .section-title-two {
-			text-align: center;
-			max-width: 550px;
-			margin: auto;
-			margin-bottom: 50px;
-			position: relative;
-			z-index: 5;
-		}
-
-		@media only screen and (min-width: 768px) and (max-width: 991px) {
-			.client-logo-area .section-title-two {
-				margin-bottom: 45px;
-			}
-		}
-
-		@media (max-width: 767px) {
-			.client-logo-area .section-title-two {
-				margin-bottom: 35px;
-			}
-		}
-
-		.client-logo-area .section-title-two span {
-			text-transform: capitalize;
-			color: var(--white);
-			background: var(--primary);
-			display: inline-block;
-			margin-bottom: 10px;
-			padding: 5px 15px;
-			border-radius: 4px;
-		}
-
-		.client-logo-area .section-title-two h2 {
-			margin-bottom: 15px;
-		}
-
-		@media only screen and (min-width: 768px) and (max-width: 991px) {
-			.client-logo-area .section-title-two h2 {
-				font-size: 2rem;
-				line-height: 2.8rem;
-			}
-		}
-
-		@media (max-width: 767px) {
-			.client-logo-area .section-title-two h2 {
-				font-size: 1.5rem;
-				line-height: 1.9rem;
-			}
-		}
-
-		.client-logo-area .section-title-two p {
-			color: var(--dark-3);
-		}
-
-		/*===== Client Logo One =====*/
-		.client-logo-one {
-			padding-top: 100px;
-			padding-bottom: 100px;
-		}
-
-		.client-logo-one .single-client {
-			margin-top: 30px;
-		}
-
-		/*===== FOOTER ONE =====*/
-		.footer-one {
-			background-color: var(--light-2);
-		}
-
-		.footer-one .footer-logo {
-			margin-top: 30px;
-		}
-
-		.footer-one .footer-widget {
-			padding-top: 70px;
-			padding-bottom: 100px;
-		}
-
-		@media only screen and (min-width: 768px) and (max-width: 991px) {
-			.footer-one .footer-widget {
-				padding-top: 40px;
-				padding-bottom: 70px;
-			}
-		}
-
-		@media (max-width: 767px) {
-			.footer-one .footer-widget {
-				padding-top: 20px;
-				padding-bottom: 50px;
-			}
-		}
-
-		.footer-one .footer-title {
-			font-size: 18px;
-			font-weight: 600;
-			line-height: 22px;
-			color: var(--black);
-			position: relative;
-		}
-
-		.footer-one .footer-app-store {
-			padding-top: 22px;
-		}
-
-		.footer-one .footer-app-store .download-title {
-			font-size: 15px;
-			display: block;
-			margin-bottom: 15px;
-			font-weight: 500;
-			color: var(--dark-1);
-		}
-
-		.footer-one .footer-app-store li {
-			display: inline-block;
-			margin-right: 8px;
-		}
-
-		.footer-one .footer-app-store li img {
-			max-width: 140px;
-		}
-
-		@media only screen and (min-width: 992px) and (max-width: 1199px) {
-			.footer-one .footer-app-store li {
-				margin-right: 6px;
-			}
-		}
-
-		.footer-one .footer-app-store li:last-child {
-			margin-right: 0;
-		}
-
-		@media (max-width: 767px) {
-			.footer-one .footer-app-store li {
-				width: 120px;
-				display: block;
-				margin-bottom: 10px;
-			}
-
-			.footer-one .footer-app-store li:last-child {
-				margin: 0;
-			}
-		}
-
-		@media only screen and (min-width: 576px) and (max-width: 767px) {
-			.footer-one .footer-app-store li {
-				width: auto;
-			}
-		}
-
-		.footer-one .footer-app-store li a {
-			-webkit-transition: all 0.2s ease-out 0s;
-			-moz-transition: all 0.2s ease-out 0s;
-			-ms-transition: all 0.2s ease-out 0s;
-			-o-transition: all 0.2s ease-out 0s;
-			transition: all 0.2s ease-out 0s;
-		}
-
-		.footer-one .footer-app-store li a:hover {
-			box-shadow: var(--shadow-4);
-			-webkit-transform: translateY(-4px);
-			-moz-transform: translateY(-4px);
-			-ms-transform: translateY(-4px);
-			-o-transform: translateY(-4px);
-			transform: translateY(-4px);
-		}
-
-		.footer-one .f-about {
-			margin-top: 30;
-		}
-
-		.footer-one .f-about .text {
-			margin-top: 20px;
-		}
-
-		@media only screen and (min-width: 1200px) and (max-width: 1399px),
-		only screen and (min-width: 1400px) {
-			.footer-one .f-about {
-				padding-right: 200px;
-			}
-		}
-
-		.footer-one .footer-link {
-			margin-top: 30px;
-		}
-
-		.footer-one .footer-link ul {
-			margin-top: 8px;
-		}
-
-		.footer-one .footer-link ul a {
-			font-size: 16px;
-			line-height: 24px;
-			color: var(--dark-3);
-			margin-top: 16px;
-			font-weight: 400;
-			-webkit-transition: all 0.3s ease-out 0s;
-			-moz-transition: all 0.3s ease-out 0s;
-			-ms-transition: all 0.3s ease-out 0s;
-			-o-transition: all 0.3s ease-out 0s;
-			transition: all 0.3s ease-out 0s;
-		}
-
-		@media (max-width: 767px) {
-			.footer-one .footer-link ul a {
-				margin-top: 12px;
-			}
-		}
-
-		.footer-one .footer-link ul a:hover {
-			color: var(--primary);
-		}
-
-		.footer-one .footer-contact {
-			margin-top: 30px;
-		}
-
-		.footer-one .footer-contact ul {
-			margin-top: 24px;
-		}
-
-		.footer-one .footer-contact ul li {
-			display: block;
-			margin-top: 15px;
-			position: relative;
-			padding-left: 24px;
-			color: var(--dark-3);
-		}
-
-		.footer-one .footer-contact ul li:first-child {
-			margin: 0;
-		}
-
-		.footer-one .footer-contact ul li i {
-			font-size: 18px;
-			position: absolute;
-			left: 0;
-			top: 4px;
-		}
-
-		.footer-one .footer-copyright {
-			border-top: 1px solid var(--gray-4);
-		}
-
-		.footer-one .copyright {
-			padding-bottom: 23px;
-			padding-top: 13px;
-		}
-
-		.footer-one .copyright .text {
-			color: var(--dark-3);
-			margin-top: 10px;
-		}
-
-		.footer-one .social {
-			margin-top: 10px;
-		}
-
-		.footer-one .social li {
-			display: inline-block;
-			margin-right: 15px;
-		}
-
-		.footer-one .social li:last-child {
-			margin-right: 0;
-		}
-
-		.footer-one .social li a {
-			font-size: 18px;
-			color: var(--dark-3);
-			-webkit-transition: all 0.3s ease-out 0s;
-			-moz-transition: all 0.3s ease-out 0s;
-			-ms-transition: all 0.3s ease-out 0s;
-			-o-transition: all 0.3s ease-out 0s;
-			transition: all 0.3s ease-out 0s;
-		}
-
-		.footer-one .social li a:hover {
-			color: var(--primary);
-		}
-	</style>
-	<!--====== FOOTER ONE PART ENDS ======-->
-	<!-- Option 1: Bootstrap Bundle with Popper -->
-	<script src="{%static '/js/bootstrap.bundle.js'%}"></script>
-	<script src="{%static '/js/bootstrap.bundle.min.js'%}"></script>
-	<!-- Photo by Leeloo Thefirst: https://www.pexels.com/photo/question-mark-on-crumpled-paper-5428826/ -->
-	<!-- <a href="https://www.freepik.com/free-photo/network-connections_2052331.htm#page=2&query=fintech%20background&position=13&from_view=search&track=ais&uuid=9e60228d-acc8-4d4e-8bd4-5904305f7cd9">Image by kjpargeter</a> on Freepik -->
-	<!-- <a href="https://www.freepik.com/free-photo/vivid-blurred-colorful-background_16618863.htm#query=gradient%20background&position=1&from_view=keyword&track=ais&uuid=e7d48121-59e5-4b73-87c8-3d4fa9e57cab">Image by user3802032</a> on Freepik -->
-	<!-- <a href="https://www.freepik.com/free-vector/realistic-front-view-smartphone-mockup-mobile-iphone-purple-frame-with-blank-white-display-vector_33632332.htm#query=mobile&position=0&from_view=search&track=sph&uuid=0f50c6fb-de3f-46dd-aaf9-5e1de0682414">Image by svstudioart</a> on Freepik -->
+<body cz-shortcut-listen="true">
+  <div id="root">
+    <div class="bg-primary w-full overflow-hidden">
+      <!-- NAVBAR -->
+      <div class="sm:px-16 px-6 flex justify-center items-center">
+        <div class="xl:max-w-[1280px] w-full">
+
+          <nav class="w-full flex py-6 justify-between items-center navbar"><img src="{% static '/img/logo.png'%}" alt="paylink"
+              class="w-[126px]">
+            <ul class="list-none sm:flex hidden justify-end items-center flex-1" id="navLinks">
+              <li class="font-poppins font-normal cursor-pointer text-[16px] text-white mr-10"
+                onclick="setActiveLink(this)"><a href="#home">Home</a>
+              </li>
+              <li class="font-poppins font-normal cursor-pointer text-[16px] text-dimWhite mr-10"
+                onclick="setActiveLink(this)"><a href="#services">Services</a></li>
+              <li class="font-poppins font-normal cursor-pointer text-[16px] text-dimWhite mr-10"
+                onclick="setActiveLink(this)"><a href="#products">Products</a></li>
+              <li class="font-poppins font-normal cursor-pointer text-[16px] text-dimWhite mr-0"
+                onclick="setActiveLink(this)"><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="sm:hidden flex flex-1 justify-end items-center">
+              <img src="{% static '/img/menu.svg'%}" alt="menu" class="w-[28px] h-[28px] object-contain" id="menuToggle">
+              <div
+                class="hidden p-6 bg-black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar"
+                id="mobileMenu">
+                <ul class="list-none flex justify-end items-start flex-1 flex-col">
+                  <li class="font-poppins font-medium cursor-pointer text-[16px] text-white mb-4"><a
+                      href="#home">Home</a></li>
+                  <li class="font-poppins font-medium cursor-pointer text-[16px] text-dimWhite mb-4"><a
+                      href="#services">Services</a></li>
+                  <li class="font-poppins font-medium cursor-pointer text-[16px] text-dimWhite mb-4"><a
+                      href="#products">Products</a></li>
+                  <li class="font-poppins font-medium cursor-pointer text-[16px] text-dimWhite mb-0"><a
+                      href="#contact">Contact</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <!-- HERO -->
+      <div class="bg-primary flex justify-center items-start">
+        <div class="xl:max-w-[1280px] w-full">
+          <section id="home" class="flex md:flex-row flex-col sm:py-16 py-6">
+            <div class="flex-1 flex justify-center items-start flex-col xl:px-0 sm:px-16 px-6">
+              <div class="flex flex-row items-center py-[6px] px-4 bg-discount-gradient rounded-[10px] mb-2">
+                <div id="progressBar" class="progress-6"></div>
+                <p class="paragraph ml-2">
+                  <span id="loadingText"
+                    class="font-poppins font-normal text-dimWhite text-[18px] leading-[30.8px] text-white">Loading...</span>
+                </p>
+                <img id="discountImage" src="{% static '/img/Discount.svg'%}" alt="discount" class="w-[32px] h-[32px] hidden" />
+
+                <!--      <p class="font-poppins font-normal text-dimWhite text-[18px] leading-[30.8px] ml-2">
+                  <span class="text-white">Loaded 100</span>
+                </p>
+                <img src="/assets/Discount.svg" alt="discount" class="w-[32px] h-[32px]"> -->
+              </div>
+
+              <div class="flex flex-row justify-between items-center w-full">
+                <div id="heroAnimation"
+                  class=" flex-1 font-poppins font-semibold ss:text-[72px] text-[52px] text-white ss:leading-[100.8px] leading-[75px]">
+                  <h1 class="">We are <span></span> <br class="sm:block hidden"></h1>
+                  <h1 class=" pl-16">PayLink <span></span></h1>
+                </div>
+                <div class="ss:flex hidden md:mr-4 mr-0">
+                  <div onclick="my_modal_3.showModal()"
+                    class="flex justify-center items-center w-[140px] h-[140px] rounded-full bg-blue-gradient p-[2px] cursor-pointer">
+                    <div class="flex justify-center items-center flex-col bg-primary w-[100%] h-[100%] rounded-full">
+                      <div class="flex justify-center items-start flex-row">
+                        <p class="font-poppins font-medium text-[18px] leading-[23.4px]"><span
+                            class="text-gradient">Get</span></p><img src="{% static '/img/arrow-up.svg' %}" alt="arrow-up"
+                          class="w-[23px] h-[23px] object-contain">
+                      </div>
+                      <p class="font-poppins font-medium text-[18px] leading-[23.4px]"><span
+                          class="text-gradient">Started</span></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="font-poppins font-normal text-dimWhite text-[18px] leading-[30.8px] max-w-[470px] mt-5">We
+                aspire to lead at the forefront of technological advancements, setting the standard for innovation and
+                excellence in the Pan-African tech landscape.</p>
+            </div>
+            <div class="flex-1 flex flex justify-center items-center md:my-0 my-10 relative"><img
+                src="{% static '/img/robot1.png'%}" alt="billing" class="w-[100%] h-[100%] relative z-[5]">
+              <div class="absolute z-[0] w-[40%] h-[35%] top-0 pink__gradient"></div>
+              <div class="absolute z-[1] w-[80%] h-[80%] rounded-full white__gradient bottom-40"></div>
+              <div class="absolute z-[0] w-[50%] h-[50%] right-20 bottom-20 blue__gradient"></div>
+            </div>
+            <div class="ss:hidden flex justify-center items-center">
+              <div
+                class="flex justify-center items-center w-[140px] h-[140px] rounded-full bg-blue-gradient p-[2px] cursor-pointer"
+                id="getStartedButton">
+                <div class="flex justify-center items-center flex-col bg-primary w-[100%] h-[100%] rounded-full">
+                  <div class="flex justify-center items-start flex-row">
+                    <p class="font-poppins font-medium text-[18px] leading-[23.4px]">
+                      <span class="text-gradient">Get
+                      </span>
+                    </p>
+                    <img src="{% static '/img/arrow-up.svg'%}" alt="arrow-up" class="w-[23px] h-[23px] object-contain">
+                  </div>
+                  <p class="font-poppins font-medium text-[18px] leading-[23.4px]"><span
+                      class="text-gradient">Started</span></p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="bg-primary sm:px-16 px-6 flex justify-center items-center">
+        <!-- SECTION CONTAINER -->
+        <div class="xl:max-w-[1280px] w-full">
+          <!-- STATS -->
+          <section class="flex justify-center items-center flex-row flex-wrap sm:mb-20 mb-6">
+            <div class="flex-1 flex justify-start items-center flex-row m-3">
+              <h4
+                class="font-poppins font-semibold xs:text-[40.89px] text-[30.89px] xs:leading-[53.16px] leading-[43.16px] text-white">
+                02</h4>
+              <p
+                class="font-poppins font-normal xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] text-gradient uppercase ml-3">
+                Number of Service</p>
+            </div>
+            <div class="flex-1 flex justify-start items-center flex-row m-3">
+              <h4
+                class="font-poppins font-semibold xs:text-[40.89px] text-[30.89px] xs:leading-[53.16px] leading-[43.16px] text-white">
+                04</h4>
+              <p
+                class="font-poppins font-normal xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] text-gradient uppercase ml-3">
+                Trusted by Company</p>
+            </div>
+            <div class="flex-1 flex justify-start items-center flex-row m-3">
+              <h4
+                class="font-poppins font-semibold xs:text-[40.89px] text-[30.89px] xs:leading-[53.16px] leading-[43.16px] text-white">
+                05</h4>
+              <p
+                class="font-poppins font-normal xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] text-gradient uppercase ml-3">
+                Number of Product</p>
+            </div>
+          </section>
+          <!-- SERVICES -->
+          <section id="services" class="flex md:flex-row flex-col sm:py-16 py-6">
+            <div class="flex-1 flex justify-center items-start flex-col">
+              <h2
+                class="font-poppins font-semibold xs:text-[48px] text-[40px] text-white xs:leading-[76.8px] leading-[66.8px] w-full">
+                You do the business, <br class="sm:block hidden"> we’ll handle the software.</h2>
+              <p class="font-poppins font-normal text-dimWhite text-[18px] leading-[30.8px] max-w-[470px] mt-5">
+                At Paylink, we offer a wide range of services tailored to meet the diverse needs of businesses, from
+                small-scale enterprises to large corporations.</p>
+              <button
+                class="py-4 px-6 font-poppins font-medium text-[18px] text-primary bg-blue-gradient rounded-[10px] outline-none mt-10"
+                id="getStartedButton" onclick="my_modal_3.showModal()">
+                Get Started</button>
+            </div>
+            <div class="flex-1 flex flex justify-center items-center md:ml-10 ml-0 md:mt-0 mt-10 relative flex-col">
+              <div class="flex flex-row p-6 rounded-[20px] mb-6 feature-card">
+                <div class="w-[64px] h-[64px] rounded-full flex justify-center items-center bg-dimBlue"><img
+                    src="{%static '/img/Star.svg' %}" alt="star" class="w-[50%] h-[50%] object-contain"></div>
+                <div class="flex-1 flex flex-col ml-3">
+                  <h4 class="font-poppins font-semibold text-white text-[18px] leading-[23.4px] mb-1">SaaS Solutions
+                  </h4>
+                  <p class="font-poppins font-normal text-dimWhite text-[16px] leading-[24px]">Our Software as a Service
+                    (SaaS) solutions cater to businesses of all sizes, providing customizable solutions according to
+                    their unique requirements</p>
+                </div>
+              </div>
+              <div class="flex flex-row p-6 rounded-[20px] mb-6 feature-card">
+                <div class="w-[64px] h-[64px] rounded-full flex justify-center items-center bg-dimBlue"><img
+                    src="{% static '/img/Send.svg'%}" alt="star" class="w-[50%] h-[50%] object-contain"></div>
+                <div class="flex-1 flex flex-col ml-3">
+                  <h4 class="font-poppins font-semibold text-white text-[18px] leading-[23.4px] mb-1">BPO Services</h4>
+                  <p class="font-poppins font-normal text-dimWhite text-[16px] leading-[24px]">Our Business Process
+                    Outsourcing (BPO) services are designed to streamline your customer care support operations.</p>
+                </div>
+              </div>
+              <div class="flex flex-row p-6 rounded-[20px] mb-0 feature-card">
+                <div class="w-[64px] h-[64px] rounded-full flex justify-center items-center bg-dimBlue"><img
+                    src="{%static '/img/Shield.svg'%}" alt="star" class="w-[50%] h-[50%] object-contain"></div>
+                <div class="flex-1 flex flex-col ml-3">
+                  <h4 class="font-poppins font-semibold text-white text-[18px] leading-[23.4px] mb-1">100% Secured</h4>
+                  <p class="font-poppins font-normal text-dimWhite text-[16px] leading-[24px]">We take proactive steps
+                    make sure your information and business are secure.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- WEB DEV -->
+          <section id="product" class="flex md:flex-row flex-col-reverse sm:py-16 py-6">
+            <div class="flex-1 flex flex justify-center items-center md:mr-10 mr-0 md:mt-0 mt-10 relative"><img
+                src="{%static '/img/webDesign.png'%}" alt="billing" class="w-[100%] h-[100%] relative z-[5] md:mr-48 mr-0">
+              <div class="absolute z-[3] -left-1/2 top-0 w-[50%] h-[50%] rounded-full white__gradient"></div>
+              <div class="absolute z-[0] w-[50%] h-[50%] -left-1/2 bottom-0 rounded-full pink__gradient"></div>
+            </div>
+            <div class="flex-1 flex justify-center items-start flex-col">
+              <h2
+                class="font-poppins font-semibold xs:text-[48px] text-[40px] text-white xs:leading-[76.8px] leading-[66.8px] w-full">
+                Web Development</h2>
+              <p class="font-poppins font-normal text-dimWhite text-[18px] leading-[30.8px] max-w-[470px] mt-5">To
+                leverage technology to empower businesses, enhance efficiency, and drive growth. Committed to providing
+                top-notch technological services tailored to the unique needs of businesses, we ensure they not only
+                adapt but thrive in the ever-evolving digital era.</p>
+              <button
+                class="py-4 px-6 font-poppins font-medium text-[18px] text-primary bg-blue-gradient rounded-[10px] outline-none mt-10"
+                onclick="my_modal_3.showModal()">Get
+                Started</button>
+            </div>
+          </section>
+          <!-- MOBILE DEV -->
+          <section class="flex md:flex-row flex-col sm:py-16 py-6">
+            <div class="flex-1 flex justify-center items-start flex-col">
+              <h2
+                class="font-poppins font-semibold xs:text-[48px] text-[40px] text-white xs:leading-[76.8px] leading-[66.8px] w-full">
+                Mobile Development</h2>
+              <p class="font-poppins font-normal text-dimWhite text-[18px] leading-[30.8px] max-w-[550px] mt-5">To
+                leverage technology to empower businesses, enhance efficiency, and drive growth. Committed to providing
+                top-notch technological services tailored to the unique needs of businesses, we ensure they not only
+                adapt but thrive in the ever-evolving digital era.</p>
+              <div class="flex flex-row flex-wrap sm:mt-10 mt-6"><img src="{%static '/img/apple.svg'%}" alt="google_play"
+                  class="w-[128.86px] h-[42.05px] object-contain mr-5 cursor-pointer"><img src="{% static '/img/google.svg'%}"
+                  alt="google_play" class="w-[144.17px] h-[43.08px] object-contain cursor-pointer"></div>
+            </div>
+            <div class="flex-1 flex flex justify-center items-center md:ml-10 ml-0 md:mt-0 mt-10 relative"><img
+                src="{% static '/img/card1.png'%}" alt="billing" class="w-[100%] h-[100%]"></div>
+          </section>
+          <!-- PRODUCTS -->
+          <section id="products" class="flex justify-center items-center my-4 pt-10 ">
+            <div class="swiper mySwiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <div
+                    class="flex-1 flex justify-center items-center rounded-[20px] sm:min-w-[192px] min-w-[170px]  flex justify-between flex-col client-card px-6 py-5 h-96">
+                    <img src="{%static '/img/sureLink.png'%}" alt="client_logo" class="sm:w-[192px] w-[200px] object-contain">
+                    <p class="font-poppins font-normal text-[18px] leading-[32.4px] text-dimWhite my-5">SureLink is a
+                      comprehensive insurance and reinsurance software solution tailored to meet the unique requirements
+                      of businesses.</p>
+                  </div>
+                </div>
+                <div class="swiper-slide ">
+                  <div
+                    class="flex-1 flex justify-center items-center rounded-[20px] sm:min-w-[192px] min-w-[170px]  flex justify-between flex-col client-card px-6 py-5 h-96">
+                    <img src="{% static '/img/loanLink.png'%}" alt="client_logo" class="sm:w-[192px] w-[200px] object-contain">
+                    <p class="font-poppins font-normal text-[18px] leading-[32.4px] text-dimWhite my-5">LoanLink is a
+                      feature-rich CRM (Customer Relationship Management) software solution designed to meet the diverse
+                      needs of businesses, from small-scale enterprises.</p>
+                  </div>
+                </div>
+                <div class="swiper-slide ">
+                  <div
+                    class="flex-1 flex justify-center items-center rounded-[20px] sm:min-w-[192px] min-w-[170px]  flex justify-between flex-col client-card px-6 py-5 h-96">
+                    <img src="{% static '/img/healtLink.png'%}" alt="client_logo" class="sm:w-[192px] w-[200px] object-contain">
+                    <p class="font-poppins font-normal text-[18px] leading-[32.4px] text-dimWhite my-5">HealthLink is a
+                      cutting-edge web and mobile-based application designed to streamline the connection between
+                      insurance companies, healthcare facilities, and beneficiaries</p>
+                  </div>
+                </div>
+                <div class="swiper-slide ">
+                  <div
+                    class="flex-1 flex justify-center items-center rounded-[20px] sm:min-w-[192px] min-w-[170px]  flex justify-between flex-col client-card px-6 py-5 h-96">
+                    <img src="{% static '/img/clientLink.png'%}" alt="client_logo" class="sm:w-[192px] w-[200px] object-contain">
+                    <p class="font-poppins font-normal text-[18px] leading-[32.4px] text-dimWhite my-5">ClientLink is a
+                      feature-rich CRM (Customer Relationship Management) software solution designed to meet the diverse
+                      needs of businesses, from small-scale enterprises.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- CTA -->
+          <section
+            class="flex justify-center items-center sm:my-16 my-6 sm:px-16 px-6 sm:py-12 py-4 sm:flex-row flex-col bg-black-gradient-2 rounded-[20px] box-shadow">
+            <div class="flex-1 flex flex-col">
+              <h2
+                class="font-poppins font-semibold xs:text-[48px] text-[40px] text-white xs:leading-[76.8px] leading-[66.8px] w-full">
+                Let’s try our service now!</h2>
+              <p class="font-poppins font-normal text-dimWhite text-[18px] leading-[30.8px] max-w-[470px] mt-5">Its time
+                to build your business solutions faster together contact us!</p>
+            </div>
+            <div class="flex justify-center items-center sm:ml-10 ml-0 sm:mt-0 mt-10">
+              <button
+                class="py-4 px-6 font-poppins font-medium text-[18px] text-primary bg-blue-gradient rounded-[10px] outline-none undefined"
+                onclick="my_modal_3.showModal()">Get Started</button>
+            </div>
+          </section>
+          <!-- FOOTER -->
+          <section id="contact" class="flex justify-center items-center sm:py-16 py-6 flex-col">
+            <div class="flex justify-center items-start md:flex-row flex-col mb-8 w-full">
+              <div class="flex-[1] flex flex-col justify-start mr-10"><img src="{% static '/img/logo.png'%}" alt="hoobank"
+                  class="w-[266px] h-[72.14px] object-contain">
+                <p class="font-poppins font-normal text-dimWhite text-[18px] leading-[30.8px] mt-4 max-w-[312px]">We
+                  aspire to lead at the forefront of technological advancements.</p>
+              </div>
+              <div class="flex-[1.5] w-full flex flex-row justify-between flex-wrap md:mt-0 mt-10">
+                <div class="flex flex-col ss:my-0 my-4 min-w-[150px]">
+                  <h4 class="font-poppins font-medium text-[18px] leading-[27px] text-white">Useful Links</h4>
+                  <ul class="list-none mt-4">
+                    <li
+                      class="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer mb-4">
+                      Content</li>
+                    <li
+                      class="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer mb-4">
+                      How it Works</li>
+                    <li
+                      class="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer mb-4">
+                      Create</li>
+                    <li
+                      class="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer mb-4">
+                      Explore</li>
+                    <li
+                      class="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer mb-0">
+                      Terms &amp; Services</li>
+                  </ul>
+                </div>
+                <div class="flex flex-col ss:my-0 my-4 min-w-[150px]">
+                  <h4 class="font-poppins font-medium text-[18px] leading-[27px] text-white">Community</h4>
+                  <ul class="list-none mt-4">
+                    <li
+                      class="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer mb-4">
+                      Help Center</li>
+                    <li
+                      class="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer mb-4">
+                      Partners</li>
+                    <li
+                      class="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer mb-4">
+                      Suggestions</li>
+                    <li
+                      class="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer mb-4">
+                      Blog</li>
+                    <li
+                      class="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer mb-0">
+                      Newsletters</li>
+                  </ul>
+                </div>
+                <div class="flex flex-col ss:my-0 my-4 min-w-[150px]">
+                  <h4 class="font-poppins font-medium text-[18px] leading-[27px] text-white">Help &amp; Support</h4>
+                  <ul class="list-none mt-4">
+                    <li
+                      class="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer mb-4">
+                      2nd Floor,Finance House, Hero's Place, Lusaka, Zambia</li>
+                    <li
+                      class="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer mb-4">
+                      +260 977 42 9510</li>
+                    <li onclick="my_modal_3.showModal()"
+                      class="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer mb-0">
+                      info@paylinkzm.com</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div
+              class="w-full flex justify-between items-center md:flex-row flex-col pt-6 border-t-[1px] border-t-[#3F3E45]">
+              <p class="font-poppins font-normal text-center text-[18px] leading-[27px] text-white">Copyright Ⓒ 2024
+                PayLink. All Rights Reserved.</p>
+              <div class="flex flex-row md:mt-0 mt-6">
+                <img src="{% static '/img/instagram.svg'%}" alt="social-media-1"
+                  class="social-icon w-[21px] h-[21px] object-contain cursor-pointer mr-6"
+                  data-link="https://www.instagram.com/paylink_technologies_zm_ltd?igsh=NzVzOHoyYTdmeGd1">
+                <img src="{% static '/img/facebook.svg'%}" alt="social-media-2"
+                  class="social-icon w-[21px] h-[21px] object-contain cursor-pointer mr-6"
+                  data-link="https://www.facebook.com/share/v7SHfTnS81dDM6xV/?mibextid=qi2Omg">
+                <img src="{% static '/img/twitter.svg'%}" alt="social-media-3"
+                  class="social-icon w-[21px] h-[21px] object-contain cursor-pointer mr-6"
+                  data-link="https://www.twitter.com/">
+                <img src="{% static '/img/linkedin.svg'%}" alt="social-media-4"
+                  class="social-icon w-[21px] h-[21px] object-contain cursor-pointer mr-0"
+                  data-link="https://www.linkedin.com/company/paylink-technologies-zambia-limited/">
+              </div>
+            </div>
+          </section>
+          <!-- MODAL -->
+          <div>
+            <dialog id="my_modal_3" class="modal">
+              <div class="modal-box w-11/12 max-w-3xl">
+                <h3 class="font-bold text-lg pb-7">Hello there, You can send an email to us.</h3>
+                <form method="dialog" class="space-y-5">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4"><label
+                      class="input input-bordered flex items-center gap-2">First Name :<input type="text" class="grow"
+                        name="user_firstName" placeholder="Lee" fdprocessedid="fdkfyi"></label><label
+                      class="input input-bordered flex items-center gap-2">Last Name :<input type="text" class="grow"
+                        name="user_lastName" placeholder="Phiri" fdprocessedid="mk89j"></label></div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4"><label
+                      class="input input-bordered flex items-center gap-2">Phone No :<input type="text" class="grow"
+                        name="user_phoneNumber" placeholder="+260970732144" fdprocessedid="8504uf"></label><label
+                      class="input input-bordered flex items-center gap-2">Email :<input type="email" class="grow"
+                        name="user_email" placeholder="info@paylinkzm.com" fdprocessedid="l3089r"></label></div>
+                  <div><textarea class="textarea textarea-ghost textarea-lg w-full" name="user_message"
+                      placeholder="Enter you message here.."></textarea></div>
+                  <div class="flex justify-center items-center">
+                    <button type="submit" value="Send" class="btn btn-ghost  px-10"
+                      fdprocessedid="mb7s3a3">Send</button>
+                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" fdprocessedid="s9w92u"
+                      id="closeModalButton">✕</button>
+                  </div>
+                </form>
+              </div>
+            </dialog>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- MAIN JS -->
+  <script src="./script.js"></script>
+  <!-- EMAIL JS -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+      (function () {
+        emailjs.init({
+          publicKey: "HT-W6XkVuOHTyLNNk",
+        });
+      })();
+  </script>
 </body>
 
 </html>
